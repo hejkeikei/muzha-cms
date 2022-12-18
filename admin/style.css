@@ -1,0 +1,61 @@
+* {
+    border: solid 1px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+* ::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 25vw 25vw 25vw 25vw;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "header header header header"
+        "sidebar main main main"
+        "footer footer footer footer";
+    margin: 0;
+}
+
+header {
+    grid-area: header;
+    height: 10vh;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+main {
+    grid-area: main;
+    height: 85vh;
+    overflow: scroll;
+}
+
+aside {
+    grid-area: sidebar;
+    height: 85vh;
+    overflow: scroll;
+}
+
+aside ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+aside a {
+    display: block;
+
+    padding: 1rem;
+}
+
+footer {
+    grid-area: footer;
+    height: 5vh;
+}

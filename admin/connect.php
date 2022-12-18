@@ -27,10 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo 'get connect = true';
     $sql = "CREATE TABLE settings(
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-        username VARCHAR(30) NOT NULL,
-        passcode VARCHAR(30) NOT NULL,
-        artist VARCHAR(30) NOT NULL,
-        email VARCHAR(70) NOT NULL UNIQUE
+        option_name VARCHAR(30) NULL,
+        option_value TEXT NOT NULL
     )";
     if (mysqli_query($connection, $sql)) {
         // echo "Table 'settings' created successfully.";

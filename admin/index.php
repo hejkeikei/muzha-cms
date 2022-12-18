@@ -40,6 +40,10 @@ error_reporting(E_ALL);
             $dashboard = $_GET['dashboard'];
             echo "$dashboard.php";
             include $dashboard . ".php";
+        } elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && $_GET['dashboard'] == 'settings') {
+            $dashboard = $_GET['dashboard'];
+            echo "settings.php";
+            include "settings.php";
         } else {
             $dashboard = 'dashboard';
             echo "else $dashboard";

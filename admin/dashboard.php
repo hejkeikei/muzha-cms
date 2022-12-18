@@ -8,7 +8,7 @@ if (!$connection && $_SERVER['REQUEST_METHOD'] == 'POST') :
 elseif (!$connection) :
 ?>
     <h2>Connect to Database</h2>
-    <form action="index.php?connect=true" method="post">
+    <form action="index.php?dashboard=connect" method="post">
         <label for="host">Server</label>
         <input type="text" name="host" id="host" value="localhost">
 

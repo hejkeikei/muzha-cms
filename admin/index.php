@@ -37,12 +37,12 @@ error_reporting(E_ALL);
     <main>
         <?php
         if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['dashboard'])) {
-            echo 'else get';
             $dashboard = $_GET['dashboard'];
+            echo "$dashboard.php";
             include $dashboard . ".php";
         } else {
-            echo 'else dashboard';
             $dashboard = 'dashboard';
+            echo "else $dashboard";
             include $dashboard . ".php";
         }
         ?>

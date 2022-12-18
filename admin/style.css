@@ -33,6 +33,7 @@ main {
     grid-area: main;
     height: 85vh;
     overflow: scroll;
+    padding: 1rem;
 }
 
 aside {

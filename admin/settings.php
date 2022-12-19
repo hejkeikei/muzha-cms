@@ -67,10 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <label for="sns3">Social Media(3)</label>
     <input type="text" name="sns3" id="sns3" value="<?php echo $sns3; ?>">
 
-
-    <label for="password" class="btn-sm">Reset Admin Password</label>
-    <input type="password" name="password" id="password" class="hidden">
-
     <input type="submit" value="Save">
 </form>
 <?php //else : 

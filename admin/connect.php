@@ -79,6 +79,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         // echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
     }
+    $sql7 = "CREATE TABLE menu(
+        `option_name` VARCHAR(30) NOT NULL , `option_value` BOOLEAN NOT NULL DEFAULT TRUE , `id` INT NOT NULL AUTO_INCREMENT , PRIMARY KEY (`id`)
+    )";
+    if (mysqli_query($connection, $sql6)) {
+        // echo "Table 'resources' created successfully.";
+    } else {
+        // echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
+    }
     echo '<p>Congrats! Your Database are all set!</p>';
     echo '<a href="index.php">back to main</a>';
 } else {

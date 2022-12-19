@@ -47,11 +47,11 @@ error_reporting(E_ALL);
         echo "<main id=" . $dashboard . ">";
         echo "settings.php";
         include "settings.php";
-    } elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && $_GET['dashboard'] == 'post') {
+    } elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['dashboard'])) {
         $dashboard = $_GET['dashboard'];
         echo "<main id=" . $dashboard . ">";
-        echo "post.php";
-        include "post.php";
+        echo "$dashboard.php";
+        include "$dashboard.php";
     } else {
         $dashboard = 'dashboard';
         echo "<main id=" . $dashboard . ">";

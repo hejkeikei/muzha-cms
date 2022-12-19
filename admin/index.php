@@ -31,25 +31,34 @@ error_reporting(E_ALL);
             <li><a href="index.php?dashboard=resource">Resource</a></li>
             <li><a href="index.php?dashboard=campaign">Campaign</a></li>
             <li><a href="index.php?dashboard=menu">Menu</a></li>
+            <li><a href="index.php?dashboard=style">Style</a></li>
+            <li><a href="index.php?dashboard=users">Users</a></li>
             <li><a href="index.php?dashboard=settings">Settings</a></li>
         </ul>
     </aside>
-    <main>
-        <?php
-        if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['dashboard'])) {
-            $dashboard = $_GET['dashboard'];
-            echo "$dashboard.php";
-            include $dashboard . ".php";
-        } elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && $_GET['dashboard'] == 'settings') {
-            $dashboard = $_GET['dashboard'];
-            echo "settings.php";
-            include "settings.php";
-        } else {
-            $dashboard = 'dashboard';
-            echo "else $dashboard";
-            include $dashboard . ".php";
-        }
-        ?>
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['dashboard'])) {
+        $dashboard = $_GET['dashboard'];
+        echo "<main id=" . $dashboard . ">";
+        echo "$dashboard.php";
+        include $dashboard . ".php";
+    } elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && $_GET['dashboard'] == 'settings') {
+        $dashboard = $_GET['dashboard'];
+        echo "<main id=" . $dashboard . ">";
+        echo "settings.php";
+        include "settings.php";
+    } elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && $_GET['dashboard'] == 'post') {
+        $dashboard = $_GET['dashboard'];
+        echo "<main id=" . $dashboard . ">";
+        echo "post.php";
+        include "post.php";
+    } else {
+        $dashboard = 'dashboard';
+        echo "<main id=" . $dashboard . ">";
+        echo "else $dashboard";
+        include $dashboard . ".php";
+    }
+    ?>
 
     </main>
     <footer>Muzha CMS</footer>

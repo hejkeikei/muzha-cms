@@ -60,3 +60,7 @@ footer {
     grid-area: footer;
     height: 5vh;
 }
+
+label {
+    display: block;
+}

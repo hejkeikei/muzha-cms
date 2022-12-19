@@ -82,7 +82,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql7 = "CREATE TABLE menu(
         `option_name` VARCHAR(30) NOT NULL , `option_value` BOOLEAN NOT NULL DEFAULT TRUE , `id` INT NOT NULL AUTO_INCREMENT , PRIMARY KEY (`id`)
     )";
-    if (mysqli_query($connection, $sql6)) {
+    if (mysqli_query($connection, $sql7)) {
+        // echo "Table 'resources' created successfully.";
+    } else {
+        // echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
+    }
+    $sql8 = "CREATE TABLE users(
+        `id` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(30) NOT NULL , `email` VARCHAR(60) NOT NULL, `password` MEDIUMTEXT NOT NULL , `privilege` ENUM('owner','admin','editor') NOT NULL , PRIMARY KEY (`id`)
+    )";
+    if (mysqli_query($connection, $sql8)) {
         // echo "Table 'resources' created successfully.";
     } else {
         // echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);

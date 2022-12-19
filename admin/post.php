@@ -102,11 +102,6 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
             ?>
         </table>
 
-<<<<<<< Updated upstream
-=======
-        <!-- <form action="index.php?dashboard=post&action=delete&id=' . $row['id'] . '" method="post"><input type="submit" value="Delete" class="btn-danger"></form> -->
-
->>>>>>> Stashed changes
         <hr>
     <?php endif; ?>
 </section>

@@ -19,7 +19,7 @@ error_reporting(E_ALL);
     <header>
         <nav>
             <h1>|Dashboard</h1>
-            <a href="admin/index.php?logout=true">Logout</a>
+            <a href="admin/login.php">Logout</a>
         </nav>
     </header>
     <aside>

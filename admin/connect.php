@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $sql6 = "CREATE TABLE resources(
-        `id` INT NOT NULL AUTO_INCREMENT , `title` VARCHAR(30) NOT NULL , `midi` VARCHAR(30) NOT NULL , `instrumental` VARCHAR(30) NOT NULL , PRIMARY KEY (`id`)
+        `id` INT NOT NULL AUTO_INCREMENT , `title` VARCHAR(30) NOT NULL , `midi` TINYTEXT NOT NULL , `instrumental` TINYTEXT NOT NULL , PRIMARY KEY (`id`)
     )";
     if (mysqli_query($connection, $sql6)) {
         // echo "Table 'resources' created successfully.";

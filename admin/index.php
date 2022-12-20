@@ -25,7 +25,7 @@ error_reporting(E_ALL);
     <aside>
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="index.php?dashboard=single">Single</a></li>
+            <li><a href="index.php?dashboard=singles">Single</a></li>
             <li><a href="index.php?dashboard=album">Album</a></li>
             <li><a href="index.php?dashboard=post">Post</a></li>
             <li><a href="index.php?dashboard=resource">Resource</a></li>

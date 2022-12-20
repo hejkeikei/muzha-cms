@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
     }
     $sql2 = "CREATE TABLE singles(
-        `id` INT NOT NULL AUTO_INCREMENT , `tilte` VARCHAR(30) NOT NULL , `release` DATE NOT NULL , `imagefilename` VARCHAR(30) NOT NULL , `videofilename` VARCHAR(30) NOT NULL , `detail` TEXT NOT NULL , PRIMARY KEY (`id`)
+         `id` INT NOT NULL AUTO_INCREMENT , `title` VARCHAR(50) NOT NULL , `artist` VARCHAR(30) NOT NULL , `composer` VARCHAR(30) NULL , `lyrics` VARCHAR(30) NULL , `feat` VARCHAR(30) NULL , `releasedate` DATETIME NOT NULL , `audiofilename` VARCHAR(50) NOT NULL , `imagefilename` VARCHAR(50) NOT NULL , `videofilename` VARCHAR(50) NULL , `details` TEXT NULL , `genre` VARCHAR(15) NULL DEFAULT 'uncategorized' , PRIMARY KEY (`id`)
     )";
     if (mysqli_query($connection, $sql2)) {
         // echo "Table 'singles' created successfully.";

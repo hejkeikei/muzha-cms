@@ -40,12 +40,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             die(mysqli_connect_error());
         }
     }
+    if (isset($_FILES['logo'])) {
+        $myFile = $_FILES['logo'];
+        $imgdir  =  dirname(dirname(__FILE__)) . '/assets/images/';
+        $temp = explode(".", $_FILES["logo"]["name"]);
+        $newfilename = 'logo.' . end($temp);
+        $imagefilename = $imgdir . $newfilename;
+        move_uploaded_file($myFile["tmp_name"], $imagefilename);
+    }
     echo '<small class="msg">Your settings has been saved!</small>';
 }
 // if ($_SERVER['REQUEST_METHOD'] != 'POST') :
 
 ?>
-<form action="index.php?dashboard=settings&action=<?php echo $var; ?>" method="post">
+<form action="index.php?dashboard=settings&action=<?php echo $var; ?>" method="post" enctype="multipart/form-data">
     <label for="artist">Artist Name</label>
     <input type="text" name="artist" id="artist" value="<?php echo $artist; ?>">
 
@@ -58,6 +66,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <label for="adminemail">Admin Email</label>
     <input type="email" name="adminemail" id="adminemail" value="<?php echo $adminemail; ?>">
 
+    <label for="logo">Artist's Logo</label>
+    <input type="file" name="logo" id="logo" accept=".png,.svg">
+
     <label for="sns1">Social Media(1)</label>
     <input type="text" name="sns1" id="sns1" value="<?php echo $sns1; ?>">
 
@@ -67,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <label for="sns3">Social Media(3)</label>
     <input type="text" name="sns3" id="sns3" value="<?php echo $sns3; ?>">
 
-    <input type="submit" value="Save">
+    <input type="submit" value="Save" class="btn btn-md btn-primary">
 </form>
 <?php //else : 
 ?>

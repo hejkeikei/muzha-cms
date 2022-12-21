@@ -3,10 +3,10 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
 <h2>Posts</h2>
 <div>
     <?php if (isset($_GET['action'])) : ?>
-        <a href="index.php?dashboard=post">
+        <a href="index.php?dashboard=post" class="text-btn">
             << Go Back</a>
             <?php else : ?>
-                <a href="index.php?dashboard=post&action=add">Add Post</a>
+                <a href="index.php?dashboard=post&action=add" class="btn btn-theme btn-md">Add Post</a>
             <?php endif; ?>
 </div>
 <section>
@@ -47,13 +47,13 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
             //     $sql = mysqli_query($connection, $query);
             //     echo '<small class="msg">The post has been deleted!</small>';
             // }
-            echo '<a href="index.php?dashboard=post">Post List</a>';
+            echo '<a href="index.php?dashboard=post" class="btn btn-primary">Post List</a>';
         } elseif ($_GET['action'] == "delete") {
             $id = $_GET['id'];
             $query = "DELETE FROM posts WHERE id='$id'";
             $sql = mysqli_query($connection, $query);
             echo '<small class="msg">The post has been deleted!</small>';
-            echo '<a href="index.php?dashboard=post">Post List</a>';
+            echo '<a href="index.php?dashboard=post" class="btn btn-primary">Post List</a>';
         } else {
             $prefill_title = '';
             $prefill_content = '';
@@ -74,7 +74,7 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
             <input type="text" name="title" id="title" value="' . $prefill_title . '">
             <label for="content">Content</label>
             <textarea name="content" id="content" cols="60" rows="20">' . $prefill_content . '</textarea>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" class="btn btn-outlined btn-md">
         </form>';
         }
     ?>
@@ -82,12 +82,12 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
     <?php else : ?>
         <!-- Post List -->
         <table>
-            <tr>
+            <thead>
                 <th>Date</th>
                 <th>Title</th>
                 <th>Edit/Delete</th>
-            </tr>
-            <hr>
+            </thead>
+
             <?php
             $query = "SELECT `id`,`title`, `postdate` FROM `posts` ";
             $sql = mysqli_query($connection, $query);
@@ -95,13 +95,13 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
                 echo '<tr id= "' . $row['id'] . '">';
                 echo '<td>' . $row['postdate'] . '</td>';
                 echo '<td>' . $row['title'] . '</td>';
-                echo '<td><a href="index.php?dashboard=post&action=edit&id=' . $row['id'] . '">Edit</a><a href="index.php?dashboard=post&action=delete&id=' . $row['id'] . '">Delete</a></td>';
+                echo '<td><a href="index.php?dashboard=post&action=edit&id=' . $row['id'] . '" class="btn btn-sm btn-outlined">Edit</a><a href="index.php?dashboard=post&action=delete&id=' . $row['id'] . '" class="btn btn-sm text-btn btn-danger">Delete</a></td>';
                 echo '</tr>';
             }
 
             ?>
         </table>
 
-        <hr>
+
     <?php endif; ?>
 </section>

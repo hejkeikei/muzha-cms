@@ -61,27 +61,32 @@ if ($row['count(*)'] > 0) {
 ?>
 <form action="index.php?dashboard=menu&save=true" method="post">
     <div class="row">
-        <label for="single">single</label>
+        <lengend for="single">Single</lengend>
         <input type="checkbox" name="single" id="single" <?php echo $single; ?>>
+        <label for="single"></label>
     </div>
     <div class="row">
-        <label for="album">album</label>
+        <lengend for="album">Album</lengend>
         <input type="checkbox" name="album" id="album" <?php echo $album; ?>>
+        <label for="album"></label>
     </div>
     <div class="row">
-        <label for="post">post</label>
+        <lengend for="post">Post</lengend>
         <input type="checkbox" name="post" id="post" <?php echo $post; ?>>
+        <label for="post"></label>
     </div>
     <div class="row">
-        <label for="resource">resource</label>
+        <lengend for="resource">Resource</lengend>
         <input type="checkbox" name="resource" id="resource" <?php echo $resource; ?>>
+        <label for="resource"></label>
     </div>
     <div class="row">
-        <label for="campaign">campaign</label>
+        <lengend for="campaign">Campaign</lengend>
         <input type="checkbox" name="campaign" id="campaign" <?php echo $campaign; ?>>
+        <label for="campaign"></label>
     </div>
     <div class="row">
-        <input type="submit" value="Save">
+        <input type="submit" value="Save" class="btn btn-md btn-primary">
     </div>
 
 

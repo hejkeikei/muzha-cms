@@ -3,10 +3,10 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
 <h2>Users</h2>
 <div>
     <?php if (isset($_GET['action'])) : ?>
-        <a href="index.php?dashboard=users">
+        <a href="index.php?dashboard=users" class="text-btn">
             << Go Back</a>
             <?php else : ?>
-                <a href="index.php?dashboard=users&action=add">Add Users</a>
+                <a href="index.php?dashboard=users&action=add" class="btn btn-theme btn-md">Add Users</a>
             <?php endif; ?>
 </div>
 <section>
@@ -47,13 +47,13 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
             //     $sql = mysqli_query($connection, $query);
             //     echo '<small class="msg">The post has been deleted!</small>';
             // }
-            echo '<a href="index.php?dashboard=users">User List</a>';
+            echo '<a href="index.php?dashboard=users" class="btn btn-primary">User List</a>';
         } elseif ($_GET['action'] == "delete") {
             $id = $_GET['id'];
             $query = "DELETE FROM users WHERE id='$id'";
             $sql = mysqli_query($connection, $query);
             echo '<small class="msg">The user has been deleted!</small>';
-            echo '<a href="index.php?dashboard=users">User List</a>';
+            echo '<a href="index.php?dashboard=users" class="btn btn-primary">User List</a>';
         } else {
             $prefill_username = '';
             $prefill_email = '';
@@ -84,7 +84,7 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
         <input type="password" name="password" id="password">
         <label for="confirmpass">Confrim Password</label>
         <input type="password" name="confirmpass" id="confirmpass">
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" class="btn btn-outlined btn-md">
         </form>';
         }
     ?>
@@ -93,13 +93,13 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
     <?php else : ?>
         <!-- Post List -->
         <table>
-            <tr>
+            <thead>
                 <th>User</th>
                 <th>Email</th>
                 <th>Role</th>
                 <th>Edit/Delete</th>
-            </tr>
-            <hr>
+            </thead>
+
             <?php
             $query = "SELECT `id`,`username`, `email`, `privilege` FROM `users` ";
             $sql = mysqli_query($connection, $query);
@@ -108,13 +108,13 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
                 echo '<td>' . $row['username'] . '</td>';
                 echo '<td>' . $row['email'] . '</td>';
                 echo '<td>' . $row['privilege'] . '</td>';
-                echo '<td><a href="index.php?dashboard=users&action=edit&id=' . $row['id'] . '">Edit</a><a href="index.php?dashboard=users&action=delete&id=' . $row['id'] . '">Delete</a></td>';
+                echo '<td><a href="index.php?dashboard=users&action=edit&id=' . $row['id'] . '" class="btn btn-sm btn-outlined">Edit</a><a href="index.php?dashboard=users&action=delete&id=' . $row['id'] . '" class="btn btn-sm text-btn btn-danger">Delete</a></td>';
                 echo '</tr>';
             }
 
             ?>
         </table>
 
-        <hr>
+
     <?php endif; ?>
 </section>

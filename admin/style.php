@@ -15,7 +15,7 @@ if (isset($_FILES['stylesheet'])) {
 <form action="index.php?dashboard=style&upload=true" enctype="multipart/form-data" method="post" id="stylesheetUpload">
     <label for="stylesheet[]">Upload Stylesheet</label>
     <input type="file" id="stylesheet[]" name="stylesheet[]" multiple required accept=".css">
-    <input type="submit" value="Upload" id="upload">
+    <input type="submit" value="Upload" id="upload" class="btn btn-md btn-primary">
 </form>
 
 <section class="note" id="styleUploadNote">

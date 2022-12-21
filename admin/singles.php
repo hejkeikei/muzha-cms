@@ -3,10 +3,10 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
 <h2>Singles</h2>
 <div>
     <?php if (isset($_GET['action'])) : ?>
-        <a href="index.php?dashboard=singles">
+        <a href="index.php?dashboard=singles" class="text-btn">
             << Go Back</a>
             <?php else : ?>
-                <a href="index.php?dashboard=singles&action=add">Add New Singles</a>
+                <a href="index.php?dashboard=singles&action=add" class="btn btn-theme btn-md">Add New Singles</a>
             <?php endif; ?>
 </div>
 <section>
@@ -71,13 +71,13 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
                 $sql = mysqli_query($connection, $query);
                 echo '<small class="msg">The changes have been saved!</small>';
             }
-            echo '<a href="index.php?dashboard=singles">Single List</a>';
+            echo '<a href="index.php?dashboard=singles" class="btn btn-primary">Single List</a>';
         } elseif ($_GET['action'] == "delete") {
             $id = $_GET['id'];
             $query = "DELETE FROM singles WHERE id='$id'";
             $sql = mysqli_query($connection, $query);
             echo '<small class="msg">The single has been deleted!</small>';
-            echo '<a href="index.php?dashboard=singles">single List</a>';
+            echo '<a href="index.php?dashboard=singles" class="btn btn-primary">single List</a>';
         } else {
             [$id, $prefill_title, $prefill_artist, $prefill_composer, $prefill_lyrics, $prefill_feat, $prefill_releasedate, $prefill_audiofilename, $prefill_imagefilename, $prefill_videofilename, $prefill_details, $prefill_genre] = array('', '', '', '', '', '', '', '', '', '', '', 'uncategorized');
 
@@ -115,7 +115,7 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
             <textarea name="details" id="details" cols="60" rows="30"><?php echo $prefill_details; ?></textarea>
             <label for="genre">Genre</label>
             <input type="text" name="genre" id="genre" value="<?php echo $prefill_genre; ?>">
-            <input type="submit" value="Add">
+            <input type="submit" value="Add" class="btn btn-outlined btn-md">
             </form>
         <?php
 
@@ -126,13 +126,13 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
     <?php else : ?>
         <!-- Post List -->
         <table>
-            <tr>
+            <thead>
                 <th>Title</th>
                 <th>Release Date</th>
                 <th>Genre</th>
                 <th>Edit/Delete</th>
-            </tr>
-            <hr>
+            </thead>
+
             <?php
             $query = "SELECT `id`, `title`, `releasedate`, `genre` FROM `singles` ";
             $sql = mysqli_query($connection, $query);
@@ -141,38 +141,13 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
                 echo '<td>' . $row['title'] . '</td>';
                 echo '<td>' . $row['releasedate'] . '</td>';
                 echo '<td>' . $row['genre'] . '</td>';
-                echo '<td><a href="index.php?dashboard=singles&action=edit&id=' . $row['id'] . '">Edit</a><a href="index.php?dashboard=singles&action=delete&id=' . $row['id'] . '">Delete</a></td>';
+                echo '<td><a href="index.php?dashboard=singles&action=edit&id=' . $row['id'] . '" class="btn btn-sm btn-outlined">Edit</a><a href="index.php?dashboard=singles&action=delete&id=' . $row['id'] . '" class="btn btn-sm text-btn btn-danger">Delete</a></td>';
                 echo '</tr>';
             }
 
             ?>
         </table>
 
-        <hr>
+
     <?php endif; ?>
 </section>
-<!-- <form action="index.php?dashboard=singles" enctype="multipart/form-data" method="post">
-    <label for="title">Title</label>
-    <input type="text" name="title" id="title" required>
-    <label for="artist">Artist</label>
-    <input type="text" name="artist" id="artist" required>
-    <label for="composer">Composer</label>
-    <input type="text" name="composer" id="composer">
-    <label for="lyrics">Lyrics</label>
-    <input type="text" name="lyrics" id="lyrics">
-    <label for="feat">feat</label>
-    <input type="text" name="feat" id="feat">
-    <label for="releasetime">Release Date Time</label>
-    <input type="datetime" name="releasetime" id="releasetime" required>
-    <label for="audio">Audio File</label>
-    <input type="file" id="audio" name="audio" accept=".mp3,.wav" required>
-    <label for="image">Image File</label>
-    <input type="file" id="image" name="image" accept=".jpg" required>
-    <label for="video">Video File</label>
-    <input type="file" id="video" name="video" accept=".mp4">
-    <label for="details">Description/Lyrics</label>
-    <textarea name="details" id="details" cols="60" rows="30"></textarea>
-    <label for="genre">Genre</label>
-    <input type="text" name="genre" id="genre">
-    <input type="submit" value="Add">
-</form> -->

@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $sql5 = "CREATE TABLE campaign(
-        `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(200) NOT NULL , `content` TEXT NOT NULL , PRIMARY KEY (`id`)
+        `id` INT NOT NULL AUTO_INCREMENT , `title` VARCHAR(50) NOT NULL , `slogan` VARCHAR(50) NOT NULL , `type` VARCHAR(20) NOT NULL DEFAULT '0',`no` INT NOT NULL , `releasedate` DATE NOT NULL , `details` TEXT NOT NULL , `video` VARCHAR(100) NOT NULL , `ytb` TINYTEXT NOT NULL , `background` TINYTEXT NOT NULL , `sales` VARCHAR(100) NOT NULL , `hero` TINYTEXT NOT NULL , `setting` BOOLEAN NOT NULL DEFAULT FALSE , PRIMARY KEY (`id`)
     )";
     if (mysqli_query($connection, $sql5)) {
         // echo "Table 'campaign' created successfully.";

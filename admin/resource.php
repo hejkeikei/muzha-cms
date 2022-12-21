@@ -3,10 +3,10 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
 <h2>Resource</h2>
 <div>
     <?php if (isset($_GET['action'])) : ?>
-        <a href="index.php?dashboard=resource">
+        <a href="index.php?dashboard=resource" class="text-btn">
             << Go Back</a>
             <?php else : ?>
-                <a href="index.php?dashboard=resource&action=add">Add New Track</a>
+                <a href="index.php?dashboard=resource&action=add" class="btn btn-theme btn-md">Add New Track</a>
             <?php endif; ?>
 </div>
 <section>
@@ -55,13 +55,13 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
                 echo '<small class="msg">The track has been saved!</small>';
             }
 
-            echo '<a href="index.php?dashboard=resource">Track List</a>';
+            echo '<a href="index.php?dashboard=resource" class="btn btn-primary">Track List</a>';
         } elseif ($_GET['action'] == "delete") {
             $id = $_GET['id'];
             $query = "DELETE FROM resources WHERE id='$id'";
             $sql = mysqli_query($connection, $query);
             echo '<small class="msg">The track has been deleted!</small>';
-            echo '<a href="index.php?dashboard=resource">Track List</a>';
+            echo '<a href="index.php?dashboard=resource" class="btn btn-primary">Track List</a>';
         } else {
             $id = '';
             $prefill_title = '';
@@ -90,7 +90,7 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
             <label for="instrumental">Instrumental File</label>
             <input type="file" id="instrumental" name="instrumental" accept=".mp3,.wav" required value="<?php echo $prefill_instrumental; ?>">
 
-            <input type="submit" value="Add">
+            <input type="submit" value="Add" class="btn btn-outlined btn-md">
             </form>
         <?php
 
@@ -101,13 +101,13 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
     <?php else : ?>
         <!-- Post List -->
         <table>
-            <tr>
+            <thead>
                 <th>Title</th>
                 <th>MIDI</th>
                 <th>Instrumental</th>
                 <th>Delete</th>
-            </tr>
-            <hr>
+            </thead>
+
             <?php
             $query = "SELECT * FROM `resources`";
             $sql = mysqli_query($connection, $query);
@@ -117,32 +117,34 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
 
                 echo '<tr id= "' . $row['id'] . '">';
                 echo '<td>' . $row['title'] . '</td>';
-                echo '<td><a href="../assets/midi/' . $midifile[count($midifile) - 1] . '" download="' . $row['title'] . '-midi.mid" class="btn-download btn-midi">Download</a></td>';
-                echo '<td><a href="../assets/instrumental/' . $instrumentalfile[count($instrumentalfile) - 1] . '" download="' . $row['title'] . '-instrumental.mp3" class="btn-download btn-instrumental">Download</a></td>';
-                echo '<td><a href="index.php?dashboard=resource&action=delete&id=' . $row['id'] . '">Delete</a></td>';
+                echo '<td><a href="../assets/midi/' . $midifile[count($midifile) - 1] . '" download="' . $row['title'] . '-midi.mid" class="btn btn-sm btn-download btn-midi">Download</a></td>';
+                echo '<td><a href="../assets/instrumental/' . $instrumentalfile[count($instrumentalfile) - 1] . '" download="' . $row['title'] . '-instrumental.mp3" class="btn btn-sm btn-download btn-instrumental">Download</a></td>';
+                echo '<td><a href="index.php?dashboard=resource&action=delete&id=' . $row['id'] . '" class="btn btn-sm text-btn btn-danger">Delete</a></td>';
                 echo '</tr>';
             }
 
             ?>
         </table>
 
-        <hr>
+
     <?php endif; ?>
 </section>
 <section>
     <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['terms'])) {
-        $filepath = dirname(dirname(__FILE__)) . '/assets/LICENSE.txt';
-        $license = fopen($filepath, "w") or die("Unable to save license.");
-        $txt = $_POST['terms'];
-        fwrite($license, $txt);
-        fclose($license);
-    }
+    if (!isset($_GET['action'])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['terms'])) {
+            $filepath = dirname(dirname(__FILE__)) . '/assets/LICENSE.txt';
+            $license = fopen($filepath, "w") or die("Unable to save license.");
+            $txt = $_POST['terms'];
+            fwrite($license, $txt);
+            fclose($license);
+        }
+
     ?>
-    <h3>License</h3>
-    <form action="" method="post">
-        <label for="terms">Terms and Conditions</label>
-        <textarea name="terms" id="terms" cols="60" rows="20">
+        <h3>License</h3>
+        <form action="" method="post">
+            <label for="terms">Terms and Conditions</label>
+            <textarea name="terms" id="terms" cols="60" rows="20">
             <?php
             $filepath = dirname(dirname(__FILE__)) . '/assets/LICENSE.txt';
             $license = fopen($filepath, "r") or die("Unable to open license.");
@@ -150,6 +152,7 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
             fclose($license);
             ?>
         </textarea>
-        <input type="submit" value="Save" id="licenseSave">
-    </form>
+            <input type="submit" value="Save" id="licenseSave" class="btn btn-outlined btn-md">
+        </form>
+    <?php } ?>
 </section>

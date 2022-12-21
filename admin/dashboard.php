@@ -40,4 +40,58 @@ elseif (!$connection) :
     </form>
 <?php else : ?>
     <h2>Main dashboard</h2>
+    <div class="group">
+        <h3>User</h3>
+        <p id="user"><?php echo 'Admin'; ?></p>
+    </div>
+    <div class="group">
+        <h3>Latest Post</h3>
+        <p><?php
+            $query = 'SELECT `title`,`content` FROM `posts` ORDER BY `id` DESC LIMIT 1';
+            $sql = mysqli_query($connection, $query);
+            $row = mysqli_fetch_array($sql);
+            echo '[' . $row['title'] . '] ' . $row['content'];
+            ?></p>
+
+    </div>
+    <div class="group">
+        <h3>Current Campaign</h3>
+        <p><?php
+            $query = "SELECT `id`, `title`, `setting` FROM `campaign` WHERE `setting`=1";
+            $sql = mysqli_query($connection, $query);
+            $row = mysqli_fetch_array($sql);
+            echo $row['title'];
+            ?></p>
+    </div>
+    <div class="group">
+        <h3>Latest Single</h3>
+        <p><?php
+            $query = 'SELECT `title`,`releasedate` FROM `singles` ORDER BY `id` DESC LIMIT 1';
+            $sql = mysqli_query($connection, $query);
+            $row = mysqli_fetch_array($sql);
+            echo $row['title'];
+            ?></p>
+        <h4>Release Date</h4>
+        <p><?php echo $row['releasedate']; ?></p>
+    </div>
+    <div class="group">
+        <h3>Latest Album</h3>
+        <p><?php
+            $query = 'SELECT `title` FROM `album` ORDER BY `id` DESC LIMIT 1';
+            $sql = mysqli_query($connection, $query);
+            if ($row = mysqli_fetch_array($sql)) {
+                echo $row['title'];
+            } else {
+                echo 'Add your first album';
+            }
+
+            ?></p>
+    </div>
+    <div class="group">
+        <h3>Short Cut</h3>
+        <div class="btn-group">
+            <a href="index.php?dashboard=post&action=add" class="btn btn-md btn-theme">Add Post</a>
+            <a href="index.php?dashboard=singles&action=add" class="btn btn-md btn-theme">Add New Singles</a>
+        </div>
+    </div>
 <?php endif; ?>

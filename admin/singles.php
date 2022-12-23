@@ -115,7 +115,10 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
             <textarea name="details" id="details" cols="60" rows="30"><?php echo $prefill_details; ?></textarea>
             <label for="genre">Genre</label>
             <input type="text" name="genre" id="genre" value="<?php echo $prefill_genre; ?>">
-            <input type="submit" value="Add" class="btn btn-outlined btn-md">
+            <div class="row">
+                <input type="submit" value="Add" class="btn btn-outlined btn-md">
+                <div id="loading"></div>
+            </div>
             </form>
         <?php
 

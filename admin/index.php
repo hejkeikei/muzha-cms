@@ -66,7 +66,7 @@ checkLogin($connection);
     ?>
 
     </main>
-    <footer>Muzha CMS</footer>
+    <footer><small>Muzha CMS</small></footer>
 </body>
 <script src="script.js"></script>
 

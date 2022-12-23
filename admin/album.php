@@ -124,7 +124,10 @@
             <input type="file" name="videoefilename" id="videofilename" accept=".mp4">
             <label for="detail">detail</label>
             <textarea name="detail" id="detail" cols="30" rows="10"><?php echo $prefill_details; ?></textarea>
-            <input type="submit" value="Add" class="btn btn-outlined btn-md">
+            <div class="row">
+                <input type="submit" value="Add" class="btn btn-outlined btn-md">
+                <div id="loading"></div>
+            </div>
             </form>
         <?php
 

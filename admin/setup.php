@@ -52,7 +52,7 @@
                 <input type="password" name="adminpass" id="adminpass" required>
 
                 <label for="confirmpass">Confrim Admin Password</label>
-                <input type="password" name="confirmpass" id="confirmpass" required>
+                <input type="password" name="confirmpass" id="confirmpass" required><small class="danger hidden" id="notice"> <i class="fa-solid fa-circle-exclamation"></i> Please enter same password</small>
                 <input type="submit" value="Connect" class="btn btn-primary">
             </div>
 

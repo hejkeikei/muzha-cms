@@ -22,26 +22,21 @@ endif;
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-    <header>
-
-    </header>
-    <aside>
-        <h1>Login</h1>
-    </aside>
+<body id="login">
     <main>
+        <h1>Login</h1>
         <div class="wrap" id="mainWrap">
             <h2>Welcome!</h2>
             <?php
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                echo 'POST: ' . $_POST['username'] . '<br>';
+                // echo 'POST: ' . $_POST['username'] . '<br>';
                 $userinput = mysqli_real_escape_string($connection, $_POST['username']);
                 $query = "SELECT `id`, `username`, `password`, `privilege` FROM `users` WHERE `username` = '$userinput'";
                 $sql = mysqli_query($connection, $query);
                 if ($sql && $row = mysqli_fetch_array($sql)) {
                     // echo 'sql done<br>';
                     // print_r($row);
-                    echo $row;
+                    // echo $row;
                     if (hash('whirlpool', $_POST['password']) == $row['password']) {
                         setcookie("username", $userinput, strtotime("+1 month"));
                         setcookie("login", $userinput, strtotime("+1 month"));
@@ -51,7 +46,11 @@ endif;
                         die();
                     } else {
                         echo "<p class='msg'>Invalid username or password</p>";
+                        echo '<a href="login.php" class="btn btn-primary">Back to Login</a>';
                     }
+                } else {
+                    echo "<p class='msg'>Invalid username or password</p>";
+                    echo '<a href="login.php" class="btn btn-primary">Back to Login</a>';
                 }
 
                 exit;
@@ -87,7 +86,7 @@ endif;
                         <input type="password" name="password" id="password" required>
                     </label>
                 </fieldset>
-                <input type="submit" value="Log In" class="btn">
+                <input type="submit" value="Log In" class="btn btn-primary">
             </form>
         </div>
     </main>

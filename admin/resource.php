@@ -89,8 +89,10 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
             <input type="file" id="midi" name="midi" accept=".mid" value="<?php echo $prefill_midi; ?>">
             <label for="instrumental">Instrumental File</label>
             <input type="file" id="instrumental" name="instrumental" accept=".mp3,.wav" required value="<?php echo $prefill_instrumental; ?>">
-
-            <input type="submit" value="Add" class="btn btn-outlined btn-md">
+            <div class="row">
+                <input type="submit" value="Add" class="btn btn-outlined btn-md">
+                <div id="loading"></div>
+            </div>
             </form>
         <?php
 

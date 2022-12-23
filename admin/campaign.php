@@ -123,19 +123,19 @@
     ?>
             <label for="title">Title</label>
             <input type="text" name="title" id="title" value="<?php //echo $prefill_title; 
-                                                                ?>">
+                                                                ?>" required>
             <label for="slogan">Slogan / Catchphrase</label>
             <input type="text" name="slogan" id="slogan" value="<?php //echo $prefill_slogan; 
-                                                                ?>">
+                                                                ?>" required>
             <div class="row">
-                <button class="btn btn-sm btn-theme">Choose a Single</button>
+                <button class="btn btn-sm btn-theme" id="choose">Choose a Single</button>
                 <span>or</span>
-                <button class="btn btn-sm btn-outlined">Set Manually</button>
+                <button class="btn btn-sm btn-outlined" id="manul">Set Manually</button>
             </div>
-            <fieldset id="campaignSingle">
+            <fieldset id="campaignSingle" class="hidden">
                 <legend>Choose a Single/Album</legend>
                 <select name="promote" id="promote">
-                    <option value="" disabled>---Single---</option>
+                    <option value="" disabled selected>---Single---</option>
                     <?php
                     $query = "SELECT `id`, `title`, `artist`, `composer`, `lyrics`, `feat`, `releasedate`, `audiofilename`, `imagefilename`, `videofilename`, `details`, `genre` FROM `singles`";
                     $sql = mysqli_query($connection, $query);
@@ -173,8 +173,10 @@
                                                                 ?>">
             <label for="hero">Extra Image (Foreground)</label>
             <input type="file" name="hero" id="hero" accept=".png">
-
-            <input type="submit" value="Create Campaign" class="btn btn-outlined btn-md">
+            <div class="row">
+                <input type="submit" value="Create Campaign" class="btn btn-outlined btn-md">
+                <div id="loading"></div>
+            </div>
         <?php
             echo '</form>';
         }

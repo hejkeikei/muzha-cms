@@ -28,7 +28,7 @@
             $title = mysqli_real_escape_string($connection, $_POST['title']);
             $date = date("Y/m/d");
             $content = mysqli_real_escape_string($connection, $_POST['content']);
-            echo 'title=' . $title . ' date=' . $date . ' content=' . $content;
+            // echo 'title=' . $title . ' date=' . $date . ' content=' . $content;
             if ($_GET['action'] == "add") {
                 $query = "INSERT INTO `posts`( `post`, `postdate`, `content`) VALUES ('$title','$date','$content')";
                 $sql = mysqli_query($connection, $query);
@@ -40,12 +40,7 @@
                 $sql = mysqli_query($connection, $query);
                 echo '<small class="msg">Your post has been saved!</small>';
             }
-            // elseif ($_GET['action'] == "delete") {
-            //     $id = $_GET['id'];
-            //     $sql = "DELETE FROM posts WHERE id='$id'";
-            //     $sql = mysqli_query($connection, $query);
-            //     echo '<small class="msg">The post has been deleted!</small>';
-            // }
+
             echo '<a href="index.php?dashboard=post" class="btn btn-primary">Post List</a>';
         } elseif ($_GET['action'] == "delete") {
             $id = $_GET['id'];
@@ -70,10 +65,10 @@
             }
             echo '<form action="index.php?dashboard=post&action=' . $_GET['action'] . '&id=' . $id . '" method="post">
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" value="' . $prefill_title . '">
+            <input type="text" name="title" id="title" value="' . $prefill_title . '" required>
             <label for="content">Content</label>
-            <textarea name="content" id="content" cols="60" rows="20">' . $prefill_content . '</textarea>
-            <input type="submit" value="Submit" class="btn btn-outlined btn-md">
+            <textarea name="content" id="content" cols="60" rows="20" required>' . $prefill_content . '</textarea>
+            <div class="row"><input type="submit" value="Submit" class="btn btn-outlined btn-md"><div id="loading"></div></div>
         </form>';
         }
     ?>

@@ -63,6 +63,7 @@ h5,
 h6,
 p {
     color: var(--dark);
+    cursor: default;
 }
 
 h1 {
@@ -142,7 +143,7 @@ aside a:hover {
     color: var(--dark);
 }
 
-i {
+aside i {
     margin-right: var(--pm-md);
     width: 1rem;
 }
@@ -207,12 +208,18 @@ label {
     border-radius: var(--r-md);
 }
 
-#setup {
+#setup,
+#login,
+#login main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+#login footer {
+    width: 100%;
 }
 
 #setup h2,
@@ -254,6 +261,14 @@ p.col {
 
 .date {
     font-size: x-small;
+}
+
+.danger {
+    color: var(--danger);
+}
+
+.hidden {
+    display: none;
 }
 
 /* ----------------- Components ----------------- */
@@ -316,12 +331,18 @@ a.btn {
 input[type=submit].btn-primary {
     background-color: var(--safe);
     color: var(--bg);
+    border: solid 1px var(--safe);
 }
 
 .btn-primary:hover,
 input[type=submit].btn-primary:hover {
     background-color: var(--bg);
     color: var(--dark);
+    border: solid 1px var(--dark);
+}
+
+#login .btn-primary {
+    margin: var(--pm-ms) auto;
 }
 
 .btn-outlined,
@@ -385,10 +406,15 @@ a.text-btn {
 }
 
 /* inputs */
-label {
+label,
+legend {
     color: var(--medium);
     font-size: smaller;
     margin-bottom: var(--pm-sm);
+}
+
+fieldset {
+    border: solid 2px var(--bg-darken);
 }
 
 input[type=text],
@@ -414,6 +440,10 @@ textarea:focus,
 select:focus {
     background-color: var(--bg-darken);
     outline-color: var(--dark);
+}
+
+#login input {
+    margin-bottom: 0;
 }
 
 #menu .row {
@@ -508,6 +538,63 @@ select:focus {
     font-size: 3rem;
     margin: 0;
     color: var(--dark);
+}
+
+
+#loading {
+    display: inline-block;
+}
+
+.loadwave {
+    width: 6px;
+    height: 36px;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 -2rem .5rem;
+    position: relative;
+    background: currentColor;
+    transform: translateX(100%);
+    color: var(--theme);
+    animation: animloader61 0.3s 0.3s linear infinite alternate;
+
+}
+
+.loadwave::after,
+.loadwave::before {
+    content: '';
+    width: 6px;
+    height: 36px;
+    border-radius: 4px;
+    background: currentColor;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    animation: animloader61 0.3s 0.45s linear infinite alternate;
+}
+
+.loadwave::before {
+    left: -10px;
+    animation-delay: 0s;
+}
+
+@keyframes animloader61 {
+    0% {
+        height: 36px;
+    }
+
+    100% {
+        height: 3.6px;
+    }
+}
+
+/*
+    Set the color of the icon
+  */
+svg path,
+svg rect {
+    fill: var(--theme);
 }
 
 /* table */

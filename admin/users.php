@@ -72,19 +72,19 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
             }
             echo '<form action="index.php?dashboard=users&action=' . $_GET['action'] . '&id=' . $id . '" method="post">
             <label for="username">username</label>
-            <input type="text" name="username" id="username" value="' . $prefill_username . '">
+            <input type="text" name="username" id="username" value="' . $prefill_username . '" required>
             <label for="email">E-mail</label>
-            <input type="email" name="email" id="email" value="' . $prefill_email . '">
+            <input type="email" name="email" id="email" value="' . $prefill_email . '" required>
             <label for="privilege">Role</label>
-        <select name="privilege" id="privilege">
+        <select name="privilege" id="privilege" required>
             <option value="admin">Admin</option>
             <option value="editor">Editor</option>
         </select>
             <label for="password">Password</label>
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="password" required>
         <label for="confirmpass">Confrim Password</label>
-        <input type="password" name="confirmpass" id="confirmpass">
-            <input type="submit" value="Submit" class="btn btn-outlined btn-md">
+        <input type="password" name="confirmpass" id="confirmpass" required><small class="danger hidden" id="notice"> <i class="fa-solid fa-circle-exclamation"></i> Please enter same password</small>
+            <div class="row"><input type="submit" value="Submit" class="btn btn-outlined btn-md"><div id="loading"></div></div>
         </form>';
         }
     ?>

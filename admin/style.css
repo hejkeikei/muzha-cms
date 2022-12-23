@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,500;0,700;0,900;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&family=Roboto:ital,wght@0,100;0,400;0,500;0,700;0,900;1,300&display=swap');
 
 :root {
     /* set */
     --dark: #1D2D50;
     --medium: #133B5C;
-    --theme: #1E5F74;
+    --theme: #064663;
     --white: #FCDAB7;
     /* set */
     --primary: #59C1BD;
@@ -40,7 +40,7 @@ html,
 body,
 a,
 input {
-    font-family: 'Roboto', Arial, sans-serif;
+    font-family: 'Roboto', 'Noto Sans TC', Arial, sans-serif;
 }
 
 body {
@@ -122,7 +122,8 @@ aside ul {
     padding: 0;
 }
 
-aside li {
+aside li,
+#dashboard li {
     list-style: none;
     margin: var(--pm-sm) 0;
 }
@@ -153,6 +154,7 @@ footer {
     text-align: center;
     padding: var(--pm-sm);
     margin-top: var(--pm-md);
+    color: var(--white);
 }
 
 label {
@@ -176,20 +178,82 @@ label {
 #dashboard {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 0;
+    gap: var(--pm-md);
+}
 
+
+#dashboard .group {
+    padding: var(--pm-md);
+    background-color: var(--bg-darken);
+    border-radius: var(--r-md);
+    display: flex;
+    flex-direction: column;
     gap: var(--pm-sm);
 }
 
-#dashboard .group {
-    padding: var(--pm-lg);
-    background-color: var(--bg-darken);
-    border-radius: var(--r-sm);
+#dashboard .group h3 {
+    font-weight: 500;
+    font-size: large;
+    margin: var(--pm-ms) 0;
 }
 
-#dashboard .group h3 {
-    font-weight: 300;
-    font-size: xx-large;
-    margin: var(--pm-sm) 0;
+#dashboard .row,
+.col {
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--bg);
+    padding: var(--pm-ms);
+    border-radius: var(--r-md);
+}
+
+#setup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#setup h2,
+#setup h1 {
+    text-align: center;
+    margin: var(--pm-ms);
+}
+
+#setup form {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    gap: var(--pm-md);
+}
+
+.col {
+    flex-direction: column;
+}
+
+.col p,
+p.col {
+    margin: 0;
+}
+
+
+#dashboard .block {
+    margin: var(--pm-sm);
+    text-align: center;
+}
+
+.stat {
+    font-size: 4rem;
+    margin: 0;
+}
+
+.title {
+    font-weight: 500;
+}
+
+.date {
+    font-size: x-small;
 }
 
 /* ----------------- Components ----------------- */
@@ -198,7 +262,6 @@ button,
 input[type=submit] {
     border: unset;
     outline: unset;
-    /* color: var(--dark); */
 }
 
 .btn,
@@ -229,6 +292,10 @@ a.btn {
     text-align: center;
 }
 
+.btn-group a.btn {
+    display: block;
+}
+
 .btn-theme {
     display: inline-block;
     background-color: var(--theme);
@@ -249,6 +316,12 @@ a.btn {
 input[type=submit].btn-primary {
     background-color: var(--safe);
     color: var(--bg);
+}
+
+.btn-primary:hover,
+input[type=submit].btn-primary:hover {
+    background-color: var(--bg);
+    color: var(--dark);
 }
 
 .btn-outlined,
@@ -295,6 +368,20 @@ a.text-btn {
 
 .text-btn:hover {
     background-color: var(--bg-darken);
+}
+
+#add {
+    background: none;
+    display: inline;
+    color: var(--theme);
+}
+
+.plus {
+    display: inline-block;
+    font-size: x-large;
+    vertical-align: middle;
+    margin-left: .5rem;
+    color: var(--dark);
 }
 
 /* inputs */
@@ -399,7 +486,8 @@ select:focus {
     font-weight: 500;
 }
 
-.note ul {
+.note ul,
+#dashboard ul {
     font-size: smaller;
     padding: 0;
     line-height: 1.5;
@@ -413,6 +501,13 @@ select:focus {
     padding: var(--pm-ms);
     display: inline-block;
     margin: var(--pm-ms);
+}
+
+#user_icon {
+    width: 5rem;
+    font-size: 3rem;
+    margin: 0;
+    color: var(--dark);
 }
 
 /* table */
@@ -446,4 +541,21 @@ td {
 
 td .btn {
     display: inline-block;
+}
+
+/* Responsive */
+@media screen and (min-width:795px) {
+    #dashboard #card_release {
+        grid-row-start: 1;
+        grid-row-end: span 2;
+        grid-column-start: 3;
+        grid-column-end: 3;
+    }
+}
+
+@media screen and (min-width:600px) {
+    #dashboard #card_release {
+        grid-row-start: 1;
+        grid-row-end: span 2;
+    }
 }

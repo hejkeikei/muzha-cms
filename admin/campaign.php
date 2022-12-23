@@ -1,6 +1,3 @@
-<?php include 'defines.php';
-include 'functions.php';
-$connection = mysqli_connect($sever, $user, $pass, $database); ?>
 <h2>Campaign</h2>
 <div>
     <?php if (isset($_GET['action'])) : ?>
@@ -38,7 +35,7 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
                 $temp = explode(".", $myFile["name"]);
                 $rename = toAscii($title) . '_hero.' . end($temp);
                 $herofilename = $imgdir . $rename;
-                echo $herofilename;
+                // echo $herofilename;
                 move_uploaded_file($myFile["tmp_name"], $herofilename);
             } else {
                 $herofilename = '';
@@ -52,12 +49,12 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
                 $no = mysqli_real_escape_string($connection, $arr[1]);
                 $promoteQuery = "SELECT * FROM $type WHERE id = $no";
                 $promoteSQL = mysqli_query($connection, $promoteQuery);
-                $promoteRow = mysqli_fetch_row($promoteSQL);
+                $promoteRow = mysqli_fetch_array($promoteSQL);
                 // print_r($promoteRow);
-                $releasedate = $promoteRow[6];
-                $details = $promoteRow[10];
-                $video = $promoteRow[9];
-                $background = $promoteRow[8];
+                $releasedate = $promoteRow['releasedate'];
+                $details = $promoteRow['details'];
+                $video = $promoteRow['videofilename'];
+                $background = $promoteRow['imagefilename'];
             } else {
 
                 if (isset($_FILES['background'])) {
@@ -144,6 +141,14 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
                     $sql = mysqli_query($connection, $query);
                     while ($row = mysqli_fetch_array($sql)) {
                         echo '<option value="singles-' . $row['id'] . '">' . $row['title'] . '</option>';
+                    }
+                    ?>
+                    <option value="" disabled>---Album---</option>
+                    <?php
+                    $query = "SELECT `id`, `title`, `singles`, `artist`, `releasedate`, `imagefilename`, `details` FROM `albums`";
+                    $sql = mysqli_query($connection, $query);
+                    while ($row = mysqli_fetch_array($sql)) {
+                        echo '<option value="albums-' . $row['id'] . '">' . $row['title'] . '</option>';
                     }
                     ?>
                 </select>

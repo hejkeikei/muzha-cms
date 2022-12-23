@@ -16,15 +16,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // $txt2 = "\r echo 'defines.php linked.';";
     // fwrite($myfile, $txt2);
     fclose($myfile);
-    echo '<a href="index.php?dashboard=connect&connect=true">Establish Database</a>';
-} else if ($_GET['connect'] == true) {
+    // echo '<p class="msg">Your info are saved. Now start prepare database.</p>';
+    // echo '<a href="setup.php?connect=true" class="btn btn-primary">Establish Database</a>';
     include 'defines.php';
     // echo $sever . '<br>' . $user . '<br>' . $pass . '<br>' . $database;
     $connection = mysqli_connect($sever, $user, $pass, $database);
     if (!$connection) {
         die(mysqli_connect_error());
     }
-    echo 'get connect = true';
+    // echo 'get connect = true';
     $sql = "CREATE TABLE settings(
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         option_name VARCHAR(30) NULL,
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
     }
     $sql2 = "CREATE TABLE singles(
-         `id` INT NOT NULL AUTO_INCREMENT , `title` VARCHAR(50) NOT NULL , `artist` VARCHAR(30) NOT NULL , `composer` VARCHAR(30) NULL , `lyrics` VARCHAR(30) NULL , `feat` VARCHAR(30) NULL , `releasedate` DATETIME NOT NULL , `audiofilename` VARCHAR(50) NOT NULL , `imagefilename` VARCHAR(50) NOT NULL , `videofilename` VARCHAR(50) NULL , `details` TEXT NULL , `genre` VARCHAR(15) NULL DEFAULT 'uncategorized' , PRIMARY KEY (`id`)
+         `id` INT NOT NULL AUTO_INCREMENT , `title` VARCHAR(50) NOT NULL , `artist` VARCHAR(30) NOT NULL , `composer` VARCHAR(30) NULL , `lyrics` VARCHAR(30) NULL , `feat` VARCHAR(30) NULL , `releasedate` DATETIME NOT NULL , `audiofilename` TEXT NOT NULL , `imagefilename` TEXT NOT NULL , `videofilename` TEXT NULL , `details` TEXT NULL , `genre` VARCHAR(15) NULL DEFAULT 'uncategorized' , PRIMARY KEY (`id`)
     )";
     if (mysqli_query($connection, $sql2)) {
         // echo "Table 'singles' created successfully.";
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $sql3 = "CREATE TABLE albums(
-        `id` INT NOT NULL AUTO_INCREMENT , `singles` VARCHAR(200) NOT NULL , `release` DATE NOT NULL , `imagefilename` VARCHAR(30) NOT NULL , `detail` TEXT NOT NULL , PRIMARY KEY (`id`)
+        `id` INT NOT NULL AUTO_INCREMENT ,`title` VARCHAR(50) NOT NULL, `singles` VARCHAR(200) NOT NULL , `artist` VARCHAR(50) NOT NULL, `releasedate` DATE NOT NULL , `imagefilename` TEXT NOT NULL , `videofilename` TEXT NOT NULL, `details` TEXT NOT NULL , PRIMARY KEY (`id`)
     )";
     if (mysqli_query($connection, $sql3)) {
         // echo "Table 'albums' created successfully.";
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $sql5 = "CREATE TABLE campaign(
-        `id` INT NOT NULL AUTO_INCREMENT , `title` VARCHAR(50) NOT NULL , `slogan` VARCHAR(50) NOT NULL , `type` VARCHAR(20) NOT NULL DEFAULT '0',`no` INT NOT NULL , `releasedate` DATE NOT NULL , `details` TEXT NOT NULL , `video` VARCHAR(100) NOT NULL , `ytb` TINYTEXT NOT NULL , `background` TINYTEXT NOT NULL , `sales` VARCHAR(100) NOT NULL , `hero` TINYTEXT NOT NULL , `setting` BOOLEAN NOT NULL DEFAULT FALSE , PRIMARY KEY (`id`)
+        `id` INT NOT NULL AUTO_INCREMENT , `title` VARCHAR(50) NOT NULL , `slogan` VARCHAR(50) NOT NULL , `type` VARCHAR(20) NOT NULL DEFAULT '0',`no` INT NOT NULL , `releasedate` DATE NOT NULL , `details` TEXT NOT NULL , `video` TEXT NOT NULL , `ytb` TINYTEXT NOT NULL , `background` TEXT NOT NULL , `sales` VARCHAR(100) NOT NULL , `hero` TEXT NOT NULL , `setting` BOOLEAN NOT NULL DEFAULT FALSE , PRIMARY KEY (`id`)
     )";
     if (mysqli_query($connection, $sql5)) {
         // echo "Table 'campaign' created successfully.";
@@ -84,19 +84,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     )";
     if (mysqli_query($connection, $sql7)) {
         // echo "Table 'resources' created successfully.";
+        $menuarr = ['single', 'album', 'post', 'resource', 'campaign'];
+        foreach ($menuarr as $option) {
+            $val = TRUE;
+            $query = "INSERT INTO `menu`(`option_name`, `option_value`) VALUES ('$option','$val')";
+            mysqli_query($connection, $query);
+        }
     } else {
         // echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
     }
+
+    // Setup user table and first user
     $sql8 = "CREATE TABLE users(
         `id` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(30) NOT NULL , `email` VARCHAR(60) NOT NULL, `password` MEDIUMTEXT NOT NULL , `privilege` ENUM('owner','admin','editor') NOT NULL , PRIMARY KEY (`id`)
     )";
     if (mysqli_query($connection, $sql8)) {
-        // echo "Table 'resources' created successfully.";
+        // echo "Table 'users' created successfully.";
+        $admin = mysqli_real_escape_string($connection, $_POST['admin']);
+        $adminpass = hash('whirlpool', mysqli_real_escape_string($connection, $_POST['adminpass']));
+        $adminemail = mysqli_real_escape_string($connection, $_POST['adminemail']);
+        if (empty($admin) || empty($adminemail) || empty($adminpass)) {
+            echo '<p class="msg">Oops! Looks like something is wrong, go back and check the input informaiton.</p>';
+            echo '<a href="setup.php" class="btn btn-outlined">Go back to Setup</a>';
+        } else {
+            $adminQuery = "INSERT INTO `users`(`username`, `email`, `password`, `privilege`) VALUES ('$admin','$adminemail','$adminpass','owner')";
+            if (mysqli_query($connection, $adminQuery)) {
+                // echo "Admin account created successfully.";
+            } else {
+                // echo "ERROR: Could not able to execute $adminQuery. " . mysqli_error($connection);
+            }
+        }
     } else {
         // echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
     }
     echo '<p>Congrats! Your Database are all set!</p>';
-    echo '<a href="index.php">back to main</a>';
+    echo '<a href="index.php" class="btn btn-primary">back to main</a>';
 } else {
     echo "get= " . $_GET['connect'];
     $myfile = fopen("defines.php", "w") or die("Unable to establish connection.");

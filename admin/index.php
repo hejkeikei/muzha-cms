@@ -2,7 +2,10 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
+include 'defines.php';
+include 'functions.php';
+$connection = mysqli_connect($sever, $user, $pass, $database);
+checkLogin($connection);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +23,7 @@ error_reporting(E_ALL);
     <header>
         <nav>
             <h1>Dashboard</h1>
-            <a href="login.php" class="btn btn-primary btn-md">Logout</a>
+            <a href="login.php?logout=true" class="btn btn-primary btn-md">Logout</a>
         </nav>
     </header>
     <aside>
@@ -65,5 +68,6 @@ error_reporting(E_ALL);
     </main>
     <footer>Muzha CMS</footer>
 </body>
+<script src="script.js"></script>
 
 </html>

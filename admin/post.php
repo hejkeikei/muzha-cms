@@ -1,5 +1,3 @@
-<?php include 'defines.php';
-$connection = mysqli_connect($sever, $user, $pass, $database); ?>
 <h2>Posts</h2>
 <div>
     <?php if (isset($_GET['action'])) : ?>
@@ -30,8 +28,9 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
             $title = mysqli_real_escape_string($connection, $_POST['title']);
             $date = date("Y/m/d");
             $content = mysqli_real_escape_string($connection, $_POST['content']);
+            echo 'title=' . $title . ' date=' . $date . ' content=' . $content;
             if ($_GET['action'] == "add") {
-                $query = "INSERT INTO `posts`( `title`, `postdate`, `content`) VALUES ('$title','$date','$content')";
+                $query = "INSERT INTO `posts`( `post`, `postdate`, `content`) VALUES ('$title','$date','$content')";
                 $sql = mysqli_query($connection, $query);
                 echo '<small class="msg">Your post has been created!</small>';
                 // echo '<a href="index.php?dashboard=post">Post List</a>';
@@ -89,15 +88,18 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
             </thead>
 
             <?php
-            $query = "SELECT `id`,`title`, `postdate` FROM `posts` ";
+            $query = "SELECT `id`, `post`, `postdate` FROM `posts` ";
             $sql = mysqli_query($connection, $query);
-            while ($row = mysqli_fetch_array($sql)) {
-                echo '<tr id= "' . $row['id'] . '">';
-                echo '<td>' . $row['postdate'] . '</td>';
-                echo '<td>' . $row['title'] . '</td>';
-                echo '<td><a href="index.php?dashboard=post&action=edit&id=' . $row['id'] . '" class="btn btn-sm btn-outlined">Edit</a><a href="index.php?dashboard=post&action=delete&id=' . $row['id'] . '" class="btn btn-sm text-btn btn-danger">Delete</a></td>';
-                echo '</tr>';
+            if ($sql) {
+                while ($row = mysqli_fetch_array($sql)) {
+                    echo '<tr id= "' . $row['id'] . '">';
+                    echo '<td>' . $row['postdate'] . '</td>';
+                    echo '<td>' . $row['post'] . '</td>';
+                    echo '<td><a href="index.php?dashboard=post&action=edit&id=' . $row['id'] . '" class="btn btn-sm btn-outlined">Edit</a><a href="index.php?dashboard=post&action=delete&id=' . $row['id'] . '" class="btn btn-sm text-btn btn-danger">Delete</a></td>';
+                    echo '</tr>';
+                }
             }
+
 
             ?>
         </table>

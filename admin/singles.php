@@ -151,3 +151,28 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
 
     <?php endif; ?>
 </section>
+<!-- <form action="index.php?dashboard=singles" enctype="multipart/form-data" method="post">
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" required>
+    <label for="artist">Artist</label>
+    <input type="text" name="artist" id="artist" required>
+    <label for="composer">Composer</label>
+    <input type="text" name="composer" id="composer">
+    <label for="lyrics">Lyrics</label>
+    <input type="text" name="lyrics" id="lyrics">
+    <label for="feat">feat</label>
+    <input type="text" name="feat" id="feat">
+    <label for="releasetime">Release Date Time</label>
+    <input type="datetime" name="releasetime" id="releasetime" required>
+    <label for="audio">Audio File</label>
+    <input type="file" id="audio" name="audio" accept=".mp3,.wav" required>
+    <label for="image">Image File</label>
+    <input type="file" id="image" name="image" accept=".jpg" required>
+    <label for="video">Video File</label>
+    <input type="file" id="video" name="video" accept=".mp4">
+    <label for="details">Description/Lyrics</label>
+    <textarea name="details" id="details" cols="60" rows="30"></textarea>
+    <label for="genre">Genre</label>
+    <input type="text" name="genre" id="genre">
+    <input type="submit" value="Add">
+</form> -->

@@ -1,13 +1,11 @@
 <?php
-include 'defines.php';
-$connection = mysqli_connect($sever, $user, $pass, $database);
-if (!$connection && $_SERVER['REQUEST_METHOD'] == 'POST') :
-    // die(mysqli_connect_error());  
-    include 'connect.php';
-    echo 'connect.php linked.';
-elseif (!$connection) :
+// if (!$connection && $_SERVER['REQUEST_METHOD'] == 'POST') :
+//     // die(mysqli_connect_error());  
+//     include 'connect.php';
+//     echo 'connect.php linked.';
+// elseif (!$connection) :
 ?>
-    <h2>Connect to Database</h2>
+<!-- <h2>Connect to Database</h2>
     <form action="index.php?dashboard=connect" method="post">
         <label for="host">Server</label>
         <input type="text" name="host" id="host" value="localhost" required>
@@ -37,61 +35,113 @@ elseif (!$connection) :
 
         <input type="submit" value="Create Database Connection">
 
-    </form>
-<?php else : ?>
-    <h2>Main dashboard</h2>
-    <div class="group">
-        <h3>User</h3>
-        <p id="user"><?php echo 'Admin'; ?></p>
+    </form> -->
+<?php //else : 
+?>
+<h2>Main dashboard</h2>
+<div class="group" id="card_user">
+    <h3>User</h3>
+    <div class="row">
+        <i class="fa-solid fa-circle-user" id="user_icon"></i>
+        <p id="user"><?php echo $_COOKIE['username']; ?> <span> (<?php echo $_COOKIE['role']; ?>)</span></p>
     </div>
-    <div class="group">
-        <h3>Latest Post</h3>
-        <p><?php
-            $query = 'SELECT `title`,`content` FROM `posts` ORDER BY `id` DESC LIMIT 1';
-            $sql = mysqli_query($connection, $query);
-            $row = mysqli_fetch_array($sql);
-            echo '[' . $row['title'] . '] ' . $row['content'];
-            ?></p>
+</div>
+<div class="group" id="card_release">
+    <div class="row">
 
-    </div>
-    <div class="group">
-        <h3>Current Campaign</h3>
-        <p><?php
-            $query = "SELECT `id`, `title`, `setting` FROM `campaign` WHERE `setting`=1";
-            $sql = mysqli_query($connection, $query);
-            $row = mysqli_fetch_array($sql);
-            echo $row['title'];
-            ?></p>
-    </div>
-    <div class="group">
-        <h3>Latest Single</h3>
-        <p><?php
-            $query = 'SELECT `title`,`releasedate` FROM `singles` ORDER BY `id` DESC LIMIT 1';
-            $sql = mysqli_query($connection, $query);
-            $row = mysqli_fetch_array($sql);
-            echo $row['title'];
-            ?></p>
-        <h4>Release Date</h4>
-        <p><?php echo $row['releasedate']; ?></p>
-    </div>
-    <div class="group">
-        <h3>Latest Album</h3>
-        <p><?php
-            $query = 'SELECT `title` FROM `album` ORDER BY `id` DESC LIMIT 1';
-            $sql = mysqli_query($connection, $query);
-            if ($row = mysqli_fetch_array($sql)) {
-                echo $row['title'];
-            } else {
-                echo 'Add your first album';
-            }
-
-            ?></p>
-    </div>
-    <div class="group">
-        <h3>Short Cut</h3>
-        <div class="btn-group">
-            <a href="index.php?dashboard=post&action=add" class="btn btn-md btn-theme">Add Post</a>
-            <a href="index.php?dashboard=singles&action=add" class="btn btn-md btn-theme">Add New Singles</a>
+        <div class="block">
+            <h3>Singles</h3>
+            <p class="stat">
+                <?php
+                $query = 'SELECT COUNT(`title`) FROM `singles`';
+                $sql = mysqli_query($connection, $query);
+                $row = mysqli_fetch_array($sql);
+                echo $row[0];
+                ?>
+            </p>
+        </div>
+        <div class="block">
+            <h3>Albums</h3>
+            <p class="stat">
+                <?php
+                $query = 'SELECT COUNT(`title`) FROM `albums`';
+                $sql = mysqli_query($connection, $query);
+                $row = mysqli_fetch_array($sql);
+                echo $row[0];
+                ?>
+            </p>
         </div>
     </div>
-<?php endif; ?>
+    <h3>Latest Single</h3>
+    <div class="col"><?php
+                        $query = 'SELECT `title`,`releasedate` FROM `singles` ORDER BY `id` DESC LIMIT 3';
+                        $sql = mysqli_query($connection, $query);
+
+                        if ($sql && $row = mysqli_fetch_array($sql)) {
+                            echo '<p>' . $row['title'] . '</p> <p class="date">release on ' . $row['releasedate'] . '</p>';
+                        } else {
+                            echo 'Add your first single';
+                            echo '<a href="index.php?dashboard=singles&action=add" class="plus"><i class="fa-solid fa-circle-plus"></i></a>';
+                        }
+
+                        ?></div>
+    <h3>Latest Album</h3>
+    <div class="col"><?php
+                        $query = 'SELECT `title`,`release` FROM `albums` ORDER BY `id` DESC LIMIT 1';
+                        $sql = mysqli_query($connection, $query);
+                        // print_r($sql);
+                        if ($sql && $row = mysqli_fetch_array($sql)) {
+                            echo '<p>' . $row['title'] . '</p> <p class="date">release on ' . $row['release'] . '</p>';
+                        } else {
+                            echo 'Add your first album';
+                            echo '<a href="index.php?dashboard=album&action=add" class="plus"><i class="fa-solid fa-circle-plus"></i></a>';
+                        }
+
+                        ?></div>
+</div>
+<div class="group" id="card_express">
+    <h3>Short Cut</h3>
+    <div class="btn-group">
+        <a href="index.php?dashboard=post&action=add" class="btn btn-md btn-theme">Add Post</a>
+        <a href="index.php?dashboard=singles&action=add" class="btn btn-md btn-theme">Add Singles</a>
+    </div>
+</div>
+
+<div class="group" id="card_post">
+    <h3>Latest Post</h3>
+    <ul><?php
+        $query = 'SELECT `post`,`postdate` FROM `posts` ORDER BY `id` DESC LIMIT 3';
+        $sql = mysqli_query($connection, $query);
+
+        if ($sql && $row = mysqli_fetch_array($sql)) {
+            while ($row = mysqli_fetch_array($sql)) {
+                echo '<li class="col">' . $row['postdate'] . ' <span class="title">' . $row['post'] . '</span></li>';
+            }
+        } else {
+            echo '<li class="col">Add your first post';
+            echo '<a href="index.php?dashboard=post&action=add" class="plus"><i class="fa-solid fa-circle-plus" ></i></a></li>';
+        }
+
+        ?></ul>
+
+</div>
+<div class="group" id="card_campaign">
+    <h3>Current Campaign</h3>
+    <p class="col"><?php
+
+                    $query = "SELECT `id`, `title`, `setting` FROM `campaign` WHERE `setting`=1";
+                    $sql = mysqli_query($connection, $query);
+                    if ($sql && $row = mysqli_fetch_array($sql)) {
+                        echo $row['title'];
+                    } else {
+                        echo 'Set campaign';
+                        echo '<a href="index.php?dashboard=campaign&action=add" class="plus"><i class="fa-solid fa-circle-plus"></i></a>';
+                    }
+
+                    ?></p>
+</div>
+
+
+
+<?php //endif; 
+?>

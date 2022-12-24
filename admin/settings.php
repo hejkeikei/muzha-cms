@@ -47,6 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $newfilename = 'logo.' . end($temp);
         $imagefilename = $imgdir . $newfilename;
         move_uploaded_file($myFile["tmp_name"], $imagefilename);
+        $query = "UPDATE `settings` SET `option_value`='$imagefilename' WHERE `option_name`= 'logo'";
+        $sql = mysqli_query($connection, $query);
     }
     echo '<small class="msg">Your settings has been saved!</small>';
 }

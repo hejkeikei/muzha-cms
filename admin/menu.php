@@ -86,6 +86,16 @@ if ($row['count(*)'] > 0) {
         <label for="campaign"></label>
     </div>
     <div class="row">
+        <lengend for="contact">Contact</lengend>
+        <input type="checkbox" name="contact" id="contact" <?php echo $contact; ?>>
+        <label for="contact"></label>
+    </div>
+    <div class="row">
+        <lengend for="about">About</lengend>
+        <input type="checkbox" name="about" id="about" <?php echo $about; ?>>
+        <label for="about"></label>
+    </div>
+    <div class="row">
         <input type="submit" value="Save" class="btn btn-md btn-primary">
     </div>
 

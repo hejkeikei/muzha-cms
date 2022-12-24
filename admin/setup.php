@@ -13,6 +13,8 @@
     <h1>Muzha</h1>
 
     <?php
+    include 'defines.php';
+    $connection = mysqli_connect($sever, $user, $pass, $database);
     if (!$connection && $_SERVER['REQUEST_METHOD'] == 'POST') :
         // die(mysqli_connect_error());  
         include 'connect.php';

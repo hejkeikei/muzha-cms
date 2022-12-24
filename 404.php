@@ -9,10 +9,7 @@
 </head>
 
 <body>
-    <p>test</p>
-    <?php
-    phpinfo();
-    ?>
+    <h1>404</h1>
 </body>
 
 </html>

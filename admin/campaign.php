@@ -172,7 +172,7 @@
             <input type="text" name="sales" id="sales" value="<?php //echo $prefill_sales; 
                                                                 ?>">
             <label for="hero">Extra Image (Foreground)</label>
-            <input type="file" name="hero" id="hero" accept=".png">
+            <input type="file" name="hero" id="hero" accept=".png,.gif">
             <div class="row">
                 <input type="submit" value="Create Campaign" class="btn btn-outlined btn-md">
                 <div id="loading"></div>

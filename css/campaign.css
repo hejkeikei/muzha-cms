@@ -1,0 +1,65 @@
+.campaign-box {
+    position: relative;
+    width: 100%;
+    height: 85vh;
+    max-width: unset !important;
+    overflow: hidden;
+}
+
+.campaign-box * {
+    position: absolute;
+}
+
+.campaign-date {
+    top: 10%;
+    left: 10%;
+    z-index: 3;
+}
+
+.campaign-title {
+    top: 20%;
+    left: 45%;
+    z-index: 3;
+    font-size: clamp(1.75rem, 1.5278rem + 1.1111vw, 3.75rem);
+    ;
+}
+
+.campaign-slogan {
+    top: 30%;
+    left: 45%;
+    z-index: 3;
+}
+
+.campaign-sales {
+    top: 50%;
+    left: 45%;
+    z-index: 3;
+}
+
+.campaign-details {
+    top: 40%;
+    left: 45%;
+    z-index: 3;
+}
+
+.campaign-background {
+    z-index: 0;
+    height: 85vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+.campaign-hero {
+    bottom: 30%;
+    left: 10%;
+    z-index: 1;
+    max-width: 30vw;
+}
+
+iframe,
+video {
+    right: 3%;
+    bottom: 3%;
+    max-width: 360px;
+    max-height: 240px;
+}

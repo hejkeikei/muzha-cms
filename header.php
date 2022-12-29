@@ -1,13 +1,27 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 include 'admin/defines.php';
-$connection = mysqli_connect($sever, $user, $pass, $database);
-if (!$connection) {
+$conn = mysqli_connect($sever, $user, $pass, $database);
+if (!$conn) {
     header("Location: 404.php");
     die();
 } else {
-    $query = "SELECT * FROM settings";
-    $sql = mysqli_query($connection, $query);
+    include 'functions.php';
 }
+
+$cur_dir = explode('/', getcwd());
+$root = $cur_dir[count($cur_dir) - 1];
+$currentPage = trim($_SERVER['SCRIPT_NAME'], "/.php");
+if ($currentPage == 'index') {
+    $bodyclass = 'Home';
+} else {
+    $bodyclass = $currentPage;
+}
+
+$filename = 'css/' . $currentPage . '.css';
+
 ?>
 
 <!DOCTYPE html>
@@ -17,11 +31,37 @@ if (!$connection) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title><?php echo get_info('artist'); ?> | <?php echo $bodyclass; ?></title>
+    <link rel="icon" type="image/x-icon" href="<?php echo get_info('favicon'); ?>">
+    <link rel="stylesheet" href="css/style.css">
+    <?php if (file_exists($filename)) {
+        echo '<link rel="stylesheet" href="' . $filename . '">';
+    } ?>
 </head>
 
-<body>
-
-</body>
-
-</html>
+<body class="<?php echo $bodyclass; ?>">
+    <div id="page-container">
+        <div id="content-wrap">
+            <header id="mainHeader" class="index-header">
+                <h1><a href="index"><img src="<?php echo get_info('logo'); ?>" alt="<?php echo get_info('artist'); ?>" width="100"></a></h1>
+                <nav id="menu">
+                    <ul>
+                        <?php
+                        $menunquery = "SELECT `option_name`, `option_value` FROM `menu`";
+                        if ($menunsql = mysqli_query($conn, $menunquery)) {
+                            while ($menurow = mysqli_fetch_array($menunsql)) {
+                                if ($menurow['option_value']) {
+                                    echo '<li><a href="' . $menurow['option_name'] . '">' .  ucfirst($menurow['option_name']) . '</a></li>';
+                                }
+                            }
+                        }
+                        ?>
+                    </ul>
+                </nav>
+            </header>
+            <main id="<?php echo $bodyclass; ?>Main">
+                <?php
+                if ($currentPage != 'index') {
+                    echo '<h2 class="page-heading">' . ucfirst($bodyclass) . '</h2>';
+                }
+                ?>

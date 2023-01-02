@@ -45,29 +45,31 @@
                 $temp = explode(".", $myFile["name"]);
                 $rename = toAscii($title) . '_album.' . end($temp);
                 $imagefilename = $imgdir . $rename;
+                $imagedbfilename = 'assets/images/' . $rename;
                 move_uploaded_file($myFile["tmp_name"], $imagefilename);
             } else {
-                $imagefilename = '';
+                $imagedbfilename = '';
             }
             // upload video
-            if (isset($_FILES['video'])) {
+            if (isset($_FILES['videoefilename'])) {
                 $myFile = $_FILES['video'];
                 $rename = toAscii($title) . '_albumvideo.' . end($temp);
                 $videofilename = $videodir . $rename;
+                $videodbfilename = 'assets/video/' . $rename;
                 move_uploaded_file($myFile["tmp_name"], $videofilename);
             } else {
-                $videofilename = '';
+                $videodbfilename = '';
             }
 
 
             if ($_GET['action'] == "add") {
-                $query = "INSERT INTO `albums`(`title`, `singles`, `artist`, `releasedate`, `imagefilename`, `details`, `videofilename`) VALUES ('$title','$list','$artist','$releasedate','$imagefilename','$detail','$videofilename')";
+                $query = "INSERT INTO `albums`(`title`, `singles`, `artist`, `releasedate`, `imagefilename`, `details`, `videofilename`) VALUES ('$title','$list','$artist','$releasedate','$imagedbfilename','$detail','$videodbfilename')";
                 $sql = mysqli_query($connection, $query);
                 echo '<small class="msg">The album will be release on ' . $releasedate . '!</small>';
             } elseif ($_GET['action'] == "edit") {
                 $id = $_GET['id'];
 
-                $query = "UPDATE `albums` SET `title`='$title',`singles`='$list',`artist`='$artist',`release`='$releasedate',`imagefilename`='$imagefilename',`detail`='$detail' WHERE `id`= '$id'";
+                $query = "UPDATE `albums` SET `title`='$title',`singles`='$list',`artist`='$artist',`release`='$releasedate',`imagefilename`='$imagefilename',`detail`='$detail',`videofilename` ='$videodbfilename' WHERE `id`= '$id'";
                 $sql = mysqli_query($connection, $query);
                 echo '<small class="msg">The changes have been saved!</small>';
             }

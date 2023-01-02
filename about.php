@@ -1,5 +1,5 @@
 <?php
-include 'header.php'; ?>
+include 'includes/header.php'; ?>
 <div class="container">
     <div class="box">
         <img src="<?php echo get_info('profileimg'); ?>" alt="<?php echo get_info('artist'); ?>'s profile image">
@@ -9,4 +9,4 @@ include 'header.php'; ?>
         <p><?php echo get_info('description'); ?></p>
     </article>
 </div>
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

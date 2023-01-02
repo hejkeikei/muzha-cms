@@ -10,7 +10,7 @@ if (isset($_FILES['stylesheet'])) {
         $uploadfile = $uploaddir . basename($myFile['name'][$i]);
         move_uploaded_file($myFile["tmp_name"][$i], $uploadfile);
     }
-    echo '<small class="msg">Your campaign has been created!</small>';
+    echo '<small class="msg">Your stysheets has been uploaded!</small>';
 }
 ?>
 <form action="index.php?dashboard=style&upload=true" enctype="multipart/form-data" method="post" id="stylesheetUpload">

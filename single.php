@@ -1,7 +1,7 @@
 <?php
 if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) {
     // echo "called directly";
-    include 'header.php';
+    include 'includes/header.php';
 } else {
     // echo "included/required";
 }
@@ -58,7 +58,7 @@ if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) {
 <?php
 if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) {
     // echo "called directly";
-    include 'footer.php';
+    include 'includes/footer.php';
 } else {
     // echo "included/required";
 }

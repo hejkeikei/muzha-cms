@@ -43,6 +43,7 @@ This is a simple CMS cater for music creator
 
 - Built in music player
 - User privilege settings
+- Sorting list
 - Easier styling option
 
 

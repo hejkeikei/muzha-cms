@@ -20,6 +20,11 @@
     outline: solid 1px gray;
 }
 
+.box img {
+    width: 100%;
+    object-fit: cover;
+}
+
 .box-single img {
     width: 100%;
     height: 100%;

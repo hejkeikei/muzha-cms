@@ -45,9 +45,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $imgdir  =  dirname(dirname(__FILE__)) . '/assets/images/';
         $temp = explode(".", $_FILES["logo"]["name"]);
         $newfilename = 'logo.' . end($temp);
+        $dbfilename = 'assets/images' . $newfilename;
         $imagefilename = $imgdir . $newfilename;
         move_uploaded_file($myFile["tmp_name"], $imagefilename);
-        $query = "UPDATE `settings` SET `option_value`='$imagefilename' WHERE `option_name`= 'logo'";
+        $query = "UPDATE `settings` SET `option_value`='$dbfilename' WHERE `option_name`= 'logo'";
+        $sql = mysqli_query($connection, $query);
+    }
+    if (isset($_FILES['profileimg'])) {
+        $myFile = $_FILES['profileimg'];
+        $imgdir  =  dirname(dirname(__FILE__)) . '/assets/images/';
+        $temp = explode(".", $_FILES["profileimg"]["name"]);
+        $newfilename = 'profileimg.' . end($temp);
+        $dbfilename = 'assets/images' . $newfilename;
+        $imagefilename = $imgdir . $newfilename;
+        move_uploaded_file($myFile["tmp_name"], $imagefilename);
+        $query = "UPDATE `settings` SET `option_value`='$dbfilename' WHERE `option_name`= 'profileimg'";
+        $sql = mysqli_query($connection, $query);
+    }
+    if (isset($_FILES['favicon'])) {
+        $myFile = $_FILES['favicon'];
+        $imgdir  =  dirname(dirname(__FILE__)) . '/assets/images/';
+        $temp = explode(".", $_FILES["favicon"]["name"]);
+        $newfilename = 'favicon.' . end($temp);
+        $dbfilename = 'assets/images' . $newfilename;
+        $imagefilename = $imgdir . $newfilename;
+        move_uploaded_file($myFile["tmp_name"], $imagefilename);
+        $query = "UPDATE `settings` SET `option_value`='$dbfilename' WHERE `option_name`= 'favicon'";
         $sql = mysqli_query($connection, $query);
     }
     echo '<small class="msg">Your settings has been saved!</small>';
@@ -70,6 +93,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <label for="logo">Artist's Logo</label>
     <input type="file" name="logo" id="logo" accept=".png,.svg">
+
+    <label for="profileimg">Profile Picture</label>
+    <input type="file" name="profileimg" id="profileimg" accept=".png,.jpg">
+
+    <label for="favicon">Favicon</label>
+    <input type="file" name="favicon" id="favicon" accept=".ico">
 
     <label for="sns1">Social Media(1)</label>
     <input type="text" name="sns1" id="sns1" value="<?php echo $sns1; ?>">

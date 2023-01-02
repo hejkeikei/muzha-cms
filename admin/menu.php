@@ -3,7 +3,7 @@
 include 'defines.php';
 $connection = mysqli_connect($sever, $user, $pass, $database);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $arr = ['single', 'album', 'post', 'resource', 'campaign'];
+    $arr = ['single', 'album', 'news', 'resource', 'campaign'];
     $query = "SELECT count(*) FROM `menu`";
     // $sql = mysqli_query($connection, $query);
     $result = mysqli_query($connection, $query) or die("Error in query: $query. " . mysqli_error($connection));
@@ -71,9 +71,9 @@ if ($row['count(*)'] > 0) {
         <label for="album"></label>
     </div>
     <div class="row">
-        <lengend for="post">Post</lengend>
-        <input type="checkbox" name="post" id="post" <?php echo $post; ?>>
-        <label for="post"></label>
+        <lengend for="news">News</lengend>
+        <input type="checkbox" name="news" id="news" <?php echo $news; ?>>
+        <label for="news"></label>
     </div>
     <div class="row">
         <lengend for="resource">Resource</lengend>

@@ -44,30 +44,46 @@ $connection = mysqli_connect($sever, $user, $pass, $database); ?>
             // upload audio
             if (isset($_FILES['audio'])) {
                 $myFile = $_FILES['audio'];
-                $audiofilename = $audiodir . basename($myFile['name']);
+                $temp = explode(".", $myFile["name"]);
+                $rename = toAscii($title) . '.' . end($temp);
+                $audiofilename = $audiodir . $rename;
+                $audiodbfilename = 'assets/singles/'  . $rename;
                 move_uploaded_file($myFile["tmp_name"], $audiofilename);
             }
             // upload image
             if (isset($_FILES['image'])) {
                 $myFile = $_FILES['image'];
-                $imagefilename = $imgdir . basename($myFile['name']);
+                $temp = explode(".", $myFile["name"]);
+                $rename = toAscii($title) . '_single.' . end($temp);
+                $imagefilename = $imgdir . $rename;
+                // echo $imagefilename . '<br>';
+                $imagedbfilename = 'assets/images/' .  $rename;
                 move_uploaded_file($myFile["tmp_name"], $imagefilename);
             }
             // upload video
             if (isset($_FILES['video'])) {
                 $myFile = $_FILES['video'];
-                $videofilename = $videodir . basename($myFile['name']);
-                move_uploaded_file($myFile["tmp_name"], $videofilename);
+                if ($myFile["error"] == 1) {
+                    echo "Video file exceed maximum size. Check your hosting service to learn more.<br />";
+                } else {
+                    // print_r($myFile);
+                    $temp = explode(".", $myFile["name"]);
+                    $rename = toAscii($title) . '_singlevideo.' . end($temp);
+                    $videofilename = $videodir . $rename;
+                    // echo '<br>' . $videofilename . '<br>';
+                    $videodbfilename = 'assets/video/' . $rename;
+                    move_uploaded_file($myFile["tmp_name"], $videofilename);
+                }
             }
 
 
             if ($_GET['action'] == "add") {
-                $query = "INSERT INTO `singles`(`title`, `artist`, `composer`, `lyrics`, `feat`, `releasedate`, `audiofilename`, `imagefilename`, `videofilename`, `details`, `genre`) VALUES ('$title','$artist','$composer','$lyrics','$feat','$releasedate','$audiofilename','$imagefilename','$videofilename','$details','$genre')";
+                $query = "INSERT INTO `singles`(`title`, `artist`, `composer`, `lyrics`, `feat`, `releasedate`, `audiofilename`, `imagefilename`, `videofilename`, `details`, `genre`) VALUES ('$title','$artist','$composer','$lyrics','$feat','$releasedate','$audiodbfilename','$imagedbfilename','$videodbfilename','$details','$genre')";
                 $sql = mysqli_query($connection, $query);
                 echo '<small class="msg">The single will be release on ' . $releasedate . '!</small>';
             } elseif ($_GET['action'] == "edit") {
                 $id = $_GET['id'];
-                $query = "UPDATE `singles` SET `title`='$title',`artist`='$artist',`composer`='$composer',`lyrics`='$lyrics',`feat`='$feat',`releasedate`='$releasedate',`audiofilename`='$audiofilename',`imagefilename`='$imagefilename',`videofilename`='$videofilename',`details`='$details',`genre`='$genre' WHERE `id`= '$id'";
+                $query = "UPDATE `singles` SET `title`='$title',`artist`='$artist',`composer`='$composer',`lyrics`='$lyrics',`feat`='$feat',`releasedate`='$releasedate',`audiofilename`='$audiodbfilename',`imagefilename`='$imagedbfilename',`videofilename`='$videodbfilename',`details`='$details',`genre`='$genre' WHERE `id`= '$id'";
                 $sql = mysqli_query($connection, $query);
                 echo '<small class="msg">The changes have been saved!</small>';
             }

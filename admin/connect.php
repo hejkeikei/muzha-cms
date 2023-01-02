@@ -32,9 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     )";
     if (mysqli_query($connection, $sql)) {
         // echo "Table 'settings' created successfully.";
-        $logo  =  dirname(dirname(__FILE__)) . '/assets/images/muzha.jp';
-        $settingarr = ['artist', 'description', 'email', 'adminemail', 'sns1', 'sns2', 'sns3', 'logo'];
-        $optionval = ['Unknown Artist', 'Something about the artist', 'example@email.com', 'admin@email.com', 'https://twitter.com/artist_id', 'https://www.instagram.com/artist_id/', 'https://socialmedia/artist_id/', $logo];
+        $logo  =  '/assets/images/muzha.png';
+        $profileimg = '/assets/images/muzha.jpg';
+        $favicon = '/assets/images/favicon.ico';
+        $settingarr = ['artist', 'description', 'email', 'adminemail', 'sns1', 'sns2', 'sns3', 'logo', 'profileimg', 'favicon'];
+        $optionval = ['Unknown Artist', 'Something about the artist', 'example@email.com', 'admin@email.com', 'https://twitter.com/artist_id', 'https://www.instagram.com/artist_id/', 'https://socialmedia/artist_id/', $logo, $profileimg, $favicon];
         for ($i = 0; $i < count($settingarr); $i++) {
             // echo $settingarr[$i] . ' ' . $optionval[$i];
             $query = "INSERT INTO `settings`(`option_name`, `option_value`) VALUES ('$settingarr[$i]','$optionval[$i]')";
@@ -92,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     )";
     if (mysqli_query($connection, $sql7)) {
         // echo "Table 'resources' created successfully.";
-        $menuarr = ['single', 'album', 'post', 'resource', 'campaign', 'contact', 'about'];
+        $menuarr = ['single', 'album', 'news', 'resource', 'campaign', 'contact', 'about'];
         foreach ($menuarr as $option) {
             $val = TRUE;
             $query = "INSERT INTO `menu`(`option_name`, `option_value`) VALUES ('$option','$val')";

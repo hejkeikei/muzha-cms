@@ -1,5 +1,5 @@
 <?php
-include 'header.php'; ?>
+include 'includes/header.php'; ?>
 <nav>
     <a href="discography?catagory=singles">Singles</a>
     <a href="discography">All</a>
@@ -8,4 +8,4 @@ include 'header.php'; ?>
 <div class="container">
 
 </div>
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

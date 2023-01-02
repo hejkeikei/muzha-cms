@@ -1,5 +1,5 @@
 <?php
-include 'header.php';
+include 'includes/header.php';
 if (!if_table_empty('posts')) {
     $newpost = get_max('posts');
 } else {
@@ -36,4 +36,4 @@ if (!if_table_empty('posts')) {
         ?>
     </article>
 </div>
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

@@ -1,0 +1,134 @@
+#player {
+    width: 100%;
+    max-width: 80ch;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 1rem;
+    margin: 0 auto;
+}
+
+.display {
+    display: flex;
+    background-color: #fff;
+    box-shadow: inset 0 -30px 15px -20px #000;
+    border-radius: 1rem;
+    padding: .5rem 2rem;
+    align-items: center;
+}
+
+#controls {
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: .5rem;
+    margin-top: -1rem;
+}
+
+.cover {
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    background: #eee;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: solid .5rem #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.cover-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: lightgray;
+    border: solid 3px #fff;
+}
+
+.spin {
+    animation-name: spin;
+    animation-play-state: running;
+    animation-duration: 2s;
+    animation-delay: .5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.pause {
+    animation-play-state: paused;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.btn-player,
+#playlist li {
+    background-color: unset;
+    border: none;
+    padding: 1rem;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.btn-player i {
+    font-size: large;
+    color: gray
+}
+
+.btn-player:hover,
+#playlist li:hover {
+    background-color: #eee;
+}
+
+.btn-player:hover i {
+    color: #fff;
+
+}
+
+#playlist {
+    flex-grow: 2;
+}
+
+#playlist li {
+    list-style: none;
+    margin: .25rem 0;
+    border-bottom: 1px solid #eee;
+    text-transform: capitalize;
+}
+
+#progressBar {
+    display: inline-block;
+    min-width: 60%;
+    height: 3px;
+    background-color: #eee;
+    vertical-align: middle;
+    margin: 0 .5rem;
+}
+
+#progress {
+    display: block;
+    height: 100%;
+    width: 0;
+    background-color: salmon;
+    transition: width .5s ease;
+}
+
+#timestamp {
+    display: inline;
+    font-size: smaller;
+    color: gray;
+}
+
+.hidden {
+    display: none;
+}

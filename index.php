@@ -1,5 +1,5 @@
 <?php
-include 'header.php';
+include 'includes/header.php';
 ?>
 <section id="campaign">
     <?php include 'campaign.php'; ?>
@@ -9,5 +9,5 @@ include 'header.php';
     <?php include 'album.php'; ?>
 </section>
 <?php
-include 'footer.php';
+include 'includes/footer.php';
 ?>

@@ -34,7 +34,7 @@ This is a simple CMS cater for music creator
 
 - Clone this repository or download entire file
 - Place it on desired directory
-- Go to **rootFolder/admin/index 
+- Go to **rootFolder/admin/index** 
 - Enter database info and create an account
 - All set!
 
@@ -43,6 +43,7 @@ This is a simple CMS cater for music creator
 
 - Built in music player
 - User privilege settings
+- Sorting list
 - Easier styling option
 
 

@@ -1,5 +1,5 @@
 <?php
-include 'header.php';
+include 'includes/header.php';
 ?>
 <div class="container column">
 
@@ -36,4 +36,4 @@ include 'header.php';
     </table>
 
 </div>
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer.php'; ?>

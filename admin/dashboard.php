@@ -73,25 +73,31 @@
         </div>
     </div>
     <h3>Latest Single</h3>
-    <div class="col"><?php
-                        $query = 'SELECT `title`,`releasedate` FROM `singles` ORDER BY `id` DESC LIMIT 3';
-                        $sql = mysqli_query($connection, $query);
+    <?php
+    $query = 'SELECT `title`,`releasedate` FROM `singles` ORDER BY `id` DESC LIMIT 3';
+    $sql = mysqli_query($connection, $query);
 
-                        if ($sql && $row = mysqli_fetch_array($sql)) {
-                            echo '<p>' . $row['title'] . '</p> <p class="date">release on ' . $row['releasedate'] . '</p>';
-                        } else {
-                            echo 'Add your first single';
-                            echo '<a href="index.php?dashboard=singles&action=add" class="plus"><i class="fa-solid fa-circle-plus"></i></a>';
-                        }
+    if ($sql && $row = mysqli_fetch_array($sql)) {
+        while ($row = mysqli_fetch_array($sql)) {
+            echo '<div class="col">';
+            echo '<p>' . $row['title'] . '</p> <p class="date">release on ' . $row['releasedate'] . '</p>';
+            echo '</div>';
+        }
+    } else {
+        echo '<div class="col">';
+        echo 'Add your first single';
+        echo '<a href="index.php?dashboard=singles&action=add" class="plus"><i class="fa-solid fa-circle-plus"></i></a>';
+        echo '</div>';
+    }
 
-                        ?></div>
+    ?>
     <h3>Latest Album</h3>
     <div class="col"><?php
-                        $query = 'SELECT `title`,`release` FROM `albums` ORDER BY `id` DESC LIMIT 1';
+                        $query = 'SELECT `title`,`releasedate` FROM `albums` ORDER BY `id` DESC LIMIT 1';
                         $sql = mysqli_query($connection, $query);
                         // print_r($sql);
                         if ($sql && $row = mysqli_fetch_array($sql)) {
-                            echo '<p>' . $row['title'] . '</p> <p class="date">release on ' . $row['release'] . '</p>';
+                            echo '<p>' . $row['title'] . '</p> <p class="date">release on ' . $row['releasedate'] . '</p>';
                         } else {
                             echo 'Add your first album';
                             echo '<a href="index.php?dashboard=album&action=add" class="plus"><i class="fa-solid fa-circle-plus"></i></a>';

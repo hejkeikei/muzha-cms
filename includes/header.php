@@ -8,7 +8,7 @@ if (!$conn) {
     header("Location: 404.php");
     die();
 } else {
-    include 'functions.php';
+    include 'includes/functions.php';
 }
 
 $cur_dir = explode('/', getcwd());
@@ -34,6 +34,7 @@ $filename = 'css/' . $currentPage . '.css';
     <title><?php echo get_info('artist'); ?> | <?php echo $bodyclass; ?></title>
     <link rel="icon" type="image/x-icon" href="<?php echo get_info('favicon'); ?>">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/e2110d24a9.js" crossorigin="anonymous"></script>
     <?php if (file_exists($filename)) {
         echo '<link rel="stylesheet" href="' . $filename . '">';
     } ?>

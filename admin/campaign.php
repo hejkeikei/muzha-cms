@@ -36,9 +36,10 @@
                 $rename = toAscii($title) . '_hero.' . end($temp);
                 $herofilename = $imgdir . $rename;
                 // echo $herofilename;
+                $herodbfilename = 'assets/images/' . $rename;
                 move_uploaded_file($myFile["tmp_name"], $herofilename);
             } else {
-                $herofilename = '';
+                $herodbfilename = '';
                 // echo "file hero is not set";
             }
             // if select single/album, don't take data from manual inputs
@@ -56,35 +57,40 @@
                 $video = $promoteRow['videofilename'];
                 $background = $promoteRow['imagefilename'];
             } else {
-
+                $type = '';
+                $no = '';
                 if (isset($_FILES['background'])) {
                     $myFile = $_FILES['background'];
                     $temp = explode(".", $myFile["name"]);
                     $rename = toAscii($title) . '_bg.' . end($temp);
                     $bgfilename = $imgdir . $rename;
+                    $imagedbfilename = 'assets/images/' . $rename;
                     move_uploaded_file($myFile["tmp_name"], $bgfilename);
                 } else {
-                    $background = '';
+                    $imagedbfilename = '';
                 }
 
-                if (isset($_FILES['video'])) {
+                if (isset($_FILES['video']) && $_FILES['video']['error'] < 1) {
                     $myFile = $_FILES['video'];
+                    print_r($myFile);
                     $temp = explode(".", $myFile["name"]);
                     $rename = toAscii($title) . '-video.' . end($temp);
                     $video = $videodir . $rename;
+                    $videodbfilename = 'assets/video/' . $rename;
                     move_uploaded_file($myFile["tmp_name"], $video);
                 } else {
-                    $video = '';
+                    $videodbfilename = '';
                 }
 
                 $releasedate = mysqli_real_escape_string($connection, $_POST['releasedate']);
                 $details = mysqli_real_escape_string($connection, $_POST['details']);
 
 
-                $background = $bgfilename;
+                $background = $imagedbfilename;
+                $video = $videodbfilename;
             }
             if ($_GET['action'] == "add") {
-                $query = "INSERT INTO `campaign`(`title`, `slogan`, `type`, `no`, `releasedate`, `details`, `video`, `ytb`, `background`, `sales`, `hero`, `setting`) VALUES ('$title','$slogan','$type','$no','$releasedate','$details','$video','$ytb','$background','$sales','$herofilename','$type')";
+                $query = "INSERT INTO `campaign`(`title`, `slogan`, `type`, `no`, `releasedate`, `details`, `video`, `ytb`, `background`, `sales`, `hero`, `setting`) VALUES ('$title','$slogan','$type','$no','$releasedate','$details','$video','$ytb','$background','$sales','$herodbfilename','$type')";
                 $sql = mysqli_query($connection, $query);
                 echo '<small class="msg">Your campaign has been created!</small>';
                 // echo '<a href="index.php?dashboard=post">Post List</a>';
@@ -156,8 +162,8 @@
             <fieldset class="hidden" id="campaignManual">
                 <legend>Set Manually</legend>
                 <label for="date">Release Date</label>
-                <input type="date" name="date" id="date" value="<?php //echo $prefill_releasedate; 
-                                                                ?>">
+                <input type="date" name="releasedate" id="releasedate" value="<?php //echo $prefill_releasedate; 
+                                                                                ?>">
                 <label for="details">Description</label>
                 <textarea name="details" id="details" cols="60" rows="20"></textarea>
                 <label for="video">Video(File)</label>

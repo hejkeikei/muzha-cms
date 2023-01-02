@@ -1,5 +1,5 @@
 <?php
-include 'admin/defines.php';
+include dirname(dirname(__FILE__)) . '/admin/defines.php';
 $connection = mysqli_connect($sever, $user, $pass, $database);
 
 function get_info($option)
@@ -90,7 +90,7 @@ function get_album($parts, $tags)
         if ($parts == 'singles') {
             $list = explode(",", $row[$parts]);
             echo '<ul>';
-            foreach ($list as $id) {
+            foreach ($list as $k => $id) {
                 $tracksquery = "SELECT `id`, `title`, `artist`, `feat` FROM `singles` WHERE `id`=$id";
                 $trackssql = mysqli_query($connection, $tracksquery);
                 $track = $row = mysqli_fetch_array($trackssql);
@@ -99,7 +99,7 @@ function get_album($parts, $tags)
                 } else {
                     $heading = $track['title'];
                 }
-                echo '<li id="single-' . $id . '">' . $heading . '</li>';
+                echo '<li id="single-' . $id . '" data-track="' . $k . '">' . $heading . '</li>';
             }
             echo '</ul>';
         } elseif ($parts == 'imagefilename') {
@@ -124,7 +124,7 @@ function get_album_by_id($id, $parts, $tags)
         if ($parts == 'singles') {
             $list = explode(",", $row[$parts]);
             echo '<ul>';
-            foreach ($list as $id) {
+            foreach ($list as $k => $id) {
                 $tracksquery = "SELECT `id`, `title`, `artist`, `feat` FROM `singles` WHERE `id`=$id";
                 $trackssql = mysqli_query($connection, $tracksquery);
                 $track = $row = mysqli_fetch_array($trackssql);
@@ -133,7 +133,7 @@ function get_album_by_id($id, $parts, $tags)
                 } else {
                     $heading = $track['title'];
                 }
-                echo '<li id="single-' . $id . '">' . $heading . '</li>';
+                echo '<li id="single-' . $id . '" data-track="' . $k . '">' . $heading . '</li>';
             }
             echo '</ul>';
         } elseif ($parts == 'imagefilename') {

@@ -1,6 +1,6 @@
 <?php
 if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) {
-    include 'header.php';
+    include 'includes/header.php';
     $tags = "section";
     $query = "SELECT `id`, `title`, `slogan`, `type`, `no`, `releasedate`, `details`, `video`, `ytb`, `background`, `sales`, `hero`, `setting` FROM `campaign` ORDER BY `id` DESC LIMIT 5";
 } else {
@@ -50,5 +50,5 @@ if ($sql) {
     }
 }
 if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) {
-    include 'footer.php';
+    include 'includes/footer.php';
 }

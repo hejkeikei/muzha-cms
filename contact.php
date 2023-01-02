@@ -1,5 +1,5 @@
 <?php
-include 'header.php';
+include 'includes/header.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') :
     $name = $_POST['inputname'];
     $email = $_POST['email'];
@@ -37,4 +37,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
     <?php endif; ?>
 
     </section>
-    <?php include 'footer.php'; ?>
+    <?php include 'includes/footer.php'; ?>

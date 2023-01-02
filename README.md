@@ -8,7 +8,6 @@ This is a simple CMS cater for music creator
   - [Feature](#feature)
   - [Links](#links)
 - [Set up](#set-up)
-- [Author](#author)
 
 ## Overview
 

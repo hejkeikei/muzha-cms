@@ -55,6 +55,18 @@ function get_single($parts, $tags)
             echo '<' . $tags . ' width="640" height="480" controls>';
             echo '<source src="' . $row[$parts] . '" type="video/mp4">';
             echo '</' . $tags . '>';
+        } elseif ($parts == 'player') {
+            $url = $row['audiofilename'];
+            $jsonString = json_encode($url, JSON_PRETTY_PRINT);
+            $path = 'assets/player.json';
+            $fp = fopen($path, 'w');
+            fwrite($fp, $jsonString);
+            fclose($fp);
+            echo '<div class="box">';
+            echo '<img src="' . $row['imagefilename'] . '" alt="' . $row['title'] . ' cover photo">';
+            echo '<div id="playsingle"></div>';
+            echo '</div>';
+            echo '<script src="js/single-player.js"></script>';
         } else {
             echo '<' . $tags . ' class="single-' . $parts . '">' . $row[$parts] . '</' . $tags . '>';
         }
@@ -74,6 +86,18 @@ function get_single_by_id($id, $parts, $tags)
             echo '<' . $tags . ' width="640" height="480" controls>';
             echo '<source src="' . $row[$parts] . '" type="video/mp4">';
             echo '</' . $tags . '>';
+        } elseif ($parts == 'player') {
+            $url = $row['audiofilename'];
+            $jsonString = json_encode($url, JSON_PRETTY_PRINT);
+            $path = 'assets/player.json';
+            $fp = fopen($path, 'w');
+            fwrite($fp, $jsonString);
+            fclose($fp);
+            echo '<div class="box">';
+            echo '<img src="' . $row['imagefilename'] . '" alt="' . $row['title'] . ' cover photo">';
+            echo '<div id="playsingle"></div>';
+            echo '</div>';
+            echo '<script src="js/single-player.js"></script>';
         } else {
             echo '<' . $tags . ' class="single-' . $parts . '">' . $row[$parts] . '</' . $tags . '>';
         }
@@ -185,4 +209,16 @@ function ytbEmbed($link)
     $key = $arr[count($arr) - 1];
     $frame = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' . $key . '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
     echo $frame;
+}
+
+function audioPlayer($type)
+{
+    if ($type == 'single') {
+        include 'includes/single-player.php';
+        echo '<script src="js/single-player.js"></script>';
+    } elseif ($type == 'album') {
+        include 'includes/fetch.php';
+        include 'includes/player.php';
+        echo '<script src="js/player.js"></script>';
+    }
 }

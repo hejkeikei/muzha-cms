@@ -8,22 +8,20 @@ if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) {
 ?>
 <div class="wraper">
 
-    <article class="container">
 
-        <?php
-        // $id =$_GET['id']
-        if (isset($_GET['id'])) :
-            echo '<div class="box">';
-            get_single('imagefilename', 'img');
-            echo '</div>';
-            echo '<div class="box">';
-            get_single('title', 'h3');
-            get_single('details', 'p');
-            echo '</div>';
-        else :
-        ?>
-    </article>
-    <aside>
+    <?php
+    // $id =$_GET['id']
+    if (isset($_GET['id'])) :
+        echo '<article class="container">';
+        get_single('player', 'div');
+        echo '<div class="box">';
+        get_single('title', 'h3');
+        get_single('details', 'p');
+        echo '</div>';
+        echo  '<aside>';
+    else :
+    ?>
+        </article>
         <ul class="single-list">
             <?php
             $query = "SELECT `id`, `title`, `feat`, `releasedate`, `imagefilename` FROM `singles` WHERE `releasedate` <= CURDATE() ORDER BY `releasedate` DESC LIMIT 20";
@@ -50,8 +48,8 @@ if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) {
             ?>
         </ul>
 
-    </aside>
-<?php endif; ?>
+        </aside>
+    <?php endif; ?>
 
 </div>
 

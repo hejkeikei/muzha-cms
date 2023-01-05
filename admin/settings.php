@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $imgdir  =  dirname(dirname(__FILE__)) . '/assets/images/';
         $temp = explode(".", $_FILES["logo"]["name"]);
         $newfilename = 'logo.' . end($temp);
-        $dbfilename = 'assets/images' . $newfilename;
+        $dbfilename = 'assets/images/' . $newfilename;
         $imagefilename = $imgdir . $newfilename;
         move_uploaded_file($myFile["tmp_name"], $imagefilename);
         $query = "UPDATE `settings` SET `option_value`='$dbfilename' WHERE `option_name`= 'logo'";
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $imgdir  =  dirname(dirname(__FILE__)) . '/assets/images/';
         $temp = explode(".", $_FILES["profileimg"]["name"]);
         $newfilename = 'profileimg.' . end($temp);
-        $dbfilename = 'assets/images' . $newfilename;
+        $dbfilename = 'assets/images/' . $newfilename;
         $imagefilename = $imgdir . $newfilename;
         move_uploaded_file($myFile["tmp_name"], $imagefilename);
         $query = "UPDATE `settings` SET `option_value`='$dbfilename' WHERE `option_name`= 'profileimg'";
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $imgdir  =  dirname(dirname(__FILE__)) . '/assets/images/';
         $temp = explode(".", $_FILES["favicon"]["name"]);
         $newfilename = 'favicon.' . end($temp);
-        $dbfilename = 'assets/images' . $newfilename;
+        $dbfilename = 'assets/images/' . $newfilename;
         $imagefilename = $imgdir . $newfilename;
         move_uploaded_file($myFile["tmp_name"], $imagefilename);
         $query = "UPDATE `settings` SET `option_value`='$dbfilename' WHERE `option_name`= 'favicon'";

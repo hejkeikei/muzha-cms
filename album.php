@@ -13,7 +13,7 @@ if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) {
         <?php
         // $id =$_GET['id']
         if (isset($_GET['id'])) :
-            echo '<div class="box box-album">';
+            echo '<div class="box">';
             get_album('imagefilename', 'img');
             echo '</div>';
             echo '<div class="box">';

@@ -34,10 +34,15 @@ $filename = 'css/' . $currentPage . '.css';
     <title><?php echo get_info('artist'); ?> | <?php echo $bodyclass; ?></title>
     <link rel="icon" type="image/x-icon" href="<?php echo get_info('favicon'); ?>">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
     <script src="https://kit.fontawesome.com/e2110d24a9.js" crossorigin="anonymous"></script>
     <?php if (file_exists($filename)) {
         echo '<link rel="stylesheet" href="' . $filename . '">';
-    } ?>
+    }
+    if ($bodyclass == 'single') {
+        echo '<link rel="stylesheet" href="css/player.css">';
+    }
+    ?>
 </head>
 
 <body class="<?php echo $bodyclass; ?>">
@@ -46,7 +51,9 @@ $filename = 'css/' . $currentPage . '.css';
             <header id="mainHeader" class="index-header">
                 <h1><a href="index"><img src="<?php echo get_info('logo'); ?>" alt="<?php echo get_info('artist'); ?>" width="100"></a></h1>
                 <nav id="menu">
-                    <ul>
+                    <input type="checkbox" name="menuCheck" id="menuCheck">
+                    <label for="menuCheck" id="toggle"><span></span></label>
+                    <ul id="menulist">
                         <?php
                         $menunquery = "SELECT `option_name`, `option_value` FROM `menu`";
                         if ($menunsql = mysqli_query($conn, $menunquery)) {

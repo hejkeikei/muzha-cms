@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
     <p>I will response as soon as possible:)</p>
 <?php else : ?>
     <section class="wraper">
-        <h3>Get in touch or email me directly on <a href="mailto:"><?php echo get_info('email'); ?></a></h3>
+        <h3>Get in touch or email me directly on <a href="mailto:<?php echo get_info('email'); ?>"><?php echo get_info('email'); ?></a></h3>
         <form action="<?php echo $bodyclass; ?>" method="post" class="flexbox column container">
             <label for="inputname">Name</label>
             <input type="text" name="inputname" id="inputname" placeholder="Name" required>
@@ -26,12 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
             <label for="inquiry">Inquiry</label>
             <select name="inquiry" id="inquiry" required>
                 <option value="none" disabled selected>Select your inquery</option>
-                <option value="opt1">Opt1</option>
-                <option value="opt2">Opt2</option>
+                <option value="opt1">Composing</option>
+                <option value="opt2">Collaboration</option>
                 <option value="other">Other</option>
             </select>
             <label for="message">Message</label>
-            <textarea name="message" id="message" cols="30" rows="10" required>Message</textarea>
+            <textarea name="message" id="message" cols="30" rows="10" required placeholder="Enter your message here..."></textarea>
             <input type="submit" value="Send Message" class="btn">
         </form>
     <?php endif; ?>

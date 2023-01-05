@@ -12,7 +12,7 @@ fetch("assets/player.json")
     })
     .then((data) => {
         // This is where you handle what to do with the response.
-        console.log(data);
+
         data.forEach(obj => {
             tracklist.push(obj['track']);
             imglist.push(obj['img']);
@@ -111,7 +111,7 @@ pauseBtn.addEventListener("click", () => {
 
 audio.addEventListener('ended', function () {
     //play next song
-    if ((count + 1) == tracklist.length) {
+    if ((count + 1) == tracklist.length - 1) {
         count = 0
     } else {
         count++;

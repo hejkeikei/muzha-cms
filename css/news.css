@@ -1,3 +1,34 @@
 #newsMain {
     min-height: 75vh;
 }
+
+ul time {
+    border: solid 1px var(--primary);
+    padding: .2rem .5rem;
+    color: var(--primary);
+}
+
+aside li {
+
+    list-style: none;
+    padding: .75rem 0 1rem 0;
+}
+
+aside li a {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+article {
+    background: var(--base);
+    padding: 2rem;
+    flex-grow: 2;
+    /* border: solid 2px var(--base);*/
+}
+
+@media screen and (max-width:600px) {
+    .container {
+        flex-direction: column-reverse !important;
+    }
+}

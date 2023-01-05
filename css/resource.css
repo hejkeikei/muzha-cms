@@ -1,0 +1,16 @@
+td {
+    padding: 1rem 0;
+    text-align: center;
+}
+
+td:first-of-type {
+    font-weight: 600;
+}
+
+tr:nth-of-type(odd) {
+    background-color: var(--base);
+}
+
+.container {
+    padding: 0 1rem;
+}
